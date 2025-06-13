@@ -4,7 +4,7 @@ import AuthForm from '../auth-form';
 export default function SignUpPage() {
     return (
         <div>
-            <AuthForm />
+            <AuthForm isSignUp={true} />
         </div>
         
     )

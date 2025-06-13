@@ -1,68 +1,80 @@
-import Image, { StaticImageData } from "next/image";
-import benefit1 from "@/public/benefit1.webp";
-import benefit2 from "@/public/benefit2.webp";
+import Image from "next/image";
+import { title } from "@/components/primitives";
+import { CardProps } from "@/types/index";
+import benefit1 from "@/public/benefits/benefit1.webp";
+import benefit2 from "@/public/benefits/benefit2.webp";
+import PlaceHolderImg from "@/public/commons/placeholder-image.jpg";
+// TODO: Add benefits illustration of this product
+const benefits = [  
+  {
+    name: "Complex Layout Extraction",
+    descriptionArr: [
+      "Parse documents into semantic chunks to ensure high-quality data ingestion to prepare data for RAG in downstream LLM applications",
+      "Zero-shot parsing of diverse document formats (PDFs, scans, tables) without requiring layout-specific training",
+      "Captures intricate semantic relationships between elements beyond basic OCR to extract enriched data, including form fields and layouts",
+    ],
+    illustration: benefit1,
+    alt: "Benefit 1: Complex Layout Extraction",
+  },
+  {
+    name: "Accurate Extraction of Tables and Charts",
+    descriptionArr: [
+      "Accurately extracts data from charts, tables, and complex visual layouts",
+      "Eliminates errors and partial interpretations common in text-only analysis",
+      "Enables comprehensive data capture for precise insights across industries",
+    ],
+    illustration: benefit2,
+    alt: "Benefit 2: Accurate Extraction of Tables and Charts",
+    reverse: true,
+  }
+]
 
-type BenefitCardProps = {
-  title: string;
-  descriptions: string[];
-  imgSrc: StaticImageData | string;
-  imgAlt: string;
-  reverse?: boolean;
-};
-
-function BenefitCard({ title, descriptions, imgSrc, imgAlt, reverse }: BenefitCardProps) {
+const BenefitCard = ({ name, descriptionArr, illustration, reverse }: CardProps) => {
   return (
-    <div className="w-full py-12">
-      <div className={`flex flex-col md:flex-row${reverse ? '-reverse' : ''} items-center gap-12`}>
-        <div className="flex-1 flex flex-col items-start">
-          <h3 className="text-2xl font-bold mb-6 text-left">{title}</h3>
-          <ul className="list-disc pl-6 text-black dark:text-white text-base flex flex-col gap-2 items-start text-left">
-            {descriptions.map((desc, i) => (
+    <div className="w-full py-8 px-2">
+      <div
+        className={`flex flex-col-reverse md:flex-row ${
+          reverse ? "md:flex-row-reverse" : ""
+        } items-center gap-8 md:gap-12`}
+      >
+        <div className="flex-1 flex flex-col items-start w-full">
+          <h3 className="text-2xl font-bold mb-6 text-left">{name}</h3>
+          <ul className="list-disc pl-6 text-base flex flex-col gap-2 items-start text-left">
+            {descriptionArr?.map((desc, i) => (
               <li key={i}>{desc}</li>
             ))}
           </ul>
         </div>
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-center w-full max-w-xl">
           <Image
-            src={imgSrc}
-            alt={imgAlt}
-            width={840}
-            height={600}
-            className="rounded-lg object-cover max-w-full h-auto"
+            src={illustration || PlaceHolderImg}
+            alt={name ?? ""}
+            width={600}
+            height={400}
+            className="rounded-lg object-cover w-full h-auto max-w-full"
             priority
           />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default function ProductBenefits() {
   return (
     <div>
-      <section className="flex flex-col gap-5 items-center w-full max-w-7xl">
-        <BenefitCard
-          title="Complex Layout Extraction"
-          descriptions={[
-            "Parse documents into semantic chunks to ensure high-quality data ingestion to prepare data for RAG in downstream LLM applications",
-            "Zero-shot parsing of diverse document formats (PDFs, scans, tables) without requiring layout-specific training",
-            "Captures intricate semantic relationships between elements beyond basic OCR to extract enriched data, including form fields and layouts",
-          ]}
-          imgSrc={benefit1}
-          imgAlt="Benefit 1: Complex Layout Extraction"
-        />
-        <BenefitCard
-          title="Accurate Extraction of Tables and Charts"
-          descriptions={[
-            "Accurately extracts data from charts, tables, and complex visual layouts",
-            "Eliminates errors and partial interpretations common in text-only analysis",
-            "Enables comprehensive data capture for precise insights across industries",
-          ]}
-          imgSrc={benefit2}
-          imgAlt="Benefit 2: Accurate Extraction of Tables and Charts"
-          reverse
-        />
-        {/* Add more BenefitCard components as needed */}
+      <section className="flex flex-col gap-5 items-center w-full max-w-7xl mt-20">
+        <div className={title({ class: "pb-4 text-darkBlue" })}>
+          Why Agentic Document Understanding?
+        </div>
+        {benefits.map((benefit, index) => (
+          <BenefitCard 
+            key={index}
+            name={benefit.name}
+            descriptionArr={benefit.descriptionArr}
+            illustration={benefit.illustration}
+            reverse={benefit.reverse}
+          />))}
       </section>
     </div>
   );

@@ -2,16 +2,10 @@ import { tv } from "tailwind-variants";
 
 //shared color variants
 const colorVariants = {
-  black: "text-default-900",
-  white: "#FFFFFF",
-  violet: "from-[#FF1CF7] to-[#b249f8]",
-  yellow: "from-[#FF705B] to-[#FFB457]",
-  cyan: "from-[#00b7fa] to-[#01cfea]",
-  foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
   fptBlue: "#0066B2",
   fptOrange: "#F36F21",
   fptGreen: "#0DB14B",
-  fptGradient: "fpt-gradient",
+  darkBlue: "#092156",
 }
 
 export const title = tv({
@@ -20,8 +14,8 @@ export const title = tv({
     color: colorVariants,
     size: {
       sm: "text-3xl lg:text-4xl",
-      md: "text-[2.3rem] lg:text-5xl leading-9",
-      lg: "text-4xl lg:text-6xl",
+      md: "text-[2.3rem] lg:text-5xl",
+      lg: "text-5xl lg:text-7xl",
     },
     fullWidth: {
       true: "w-full block",
@@ -33,15 +27,10 @@ export const title = tv({
   compoundVariants: [
     {
       color: [
-        "black",
-        "violet",
-        "yellow",
-        "cyan",
-        "foreground",
         "fptBlue",
         "fptOrange",
         "fptGreen",
-        "fptGradient"
+        "darkBlue"
       ],
       class: "bg-clip-text text-transparent bg-gradient-to-b",
     },
@@ -49,7 +38,7 @@ export const title = tv({
 });
 
 export const subtitle = tv({
-  base: "w-full md:w-1/2 my-2 text-lg lg:text-xl text-default-600 block max-w-full",
+  base: "w-full md:w-1/2 my-2 text-lg lg:text-xl text-default-600 block",
 
   defaultVariants: {
     fullWidth: true,
@@ -68,15 +57,11 @@ export const subtitle = tv({
   compoundVariants: [
     {
       color: [
-        "black",
-        "violet",
-        "yellow",
-        "cyan",
         "foreground",
         "fptBlue",
         "fptOrange",
         "fptGreen",
-        "fptGradient"
+        "darkBlue"
       ],
       class: "bg-clip-text text-transparent bg-gradient-to-b",
     },

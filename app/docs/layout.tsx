@@ -1,3 +1,5 @@
+import { MainNavbar } from "@/components/navbar";
+
 export default function DocsLayout({
   children,
 }: {
@@ -5,7 +7,8 @@ export default function DocsLayout({
 }) {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-lg text-center justify-center">
+      <MainNavbar />
+      <div className="inline-block w-screen text-center justify-center">
         {children}
       </div>
     </section>

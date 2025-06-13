@@ -19,21 +19,30 @@ const config = {
           "100%": { transform: "translateX(-50%)" }, // Move para a largura total
         },
       },
-      color: {
-        violet: "from-[#FF1CF7] to-[#b249f8]",
-        yellow: "from-[#FF705B] to-[#FFB457]",
-        cyan: "from-[#00b7fa] to-[#01cfea]",
-        foreground: "dark:from-[#FFFFFF] dark:to-[#4B4B4B]",
+      colors: {
+        primary: "#092156",
         fptBlue: "#0066B2",
         fptOrange: "#F36F21",
         fptGreen: "#0DB14B",
-        fptGradient: "fpt-gradient",
+        lightWhite: "#f6f8fa",
+        darkBlue: "#092156"
       },
       animation: { "infinite-scroll": "infinite-scroll linear infinite" },
     },
   },
   darkMode: "class",
-  plugins: [heroui()],
+  plugins: [heroui(
+    {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0066B2",
+            secondary: "#ffffff",
+          },
+        },
+      },
+    }
+  )],
 }
 
 module.exports = config;

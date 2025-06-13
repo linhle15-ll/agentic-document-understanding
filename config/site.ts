@@ -3,7 +3,7 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Agentic Document Understanding",
   description: "A powerful tool for extracting structured data from documents using AI.",
-  navItems: [
+  mainNavItems: [
     {
       label: "Home",
       href: "/",
@@ -18,45 +18,17 @@ export const siteConfig = {
     },
     {
       label: "About",
-      href: "/about",
+      href: "https://fpt-is.com/",
     },
     {
       label: "Get started",
-      href: "/settings",
-    },
-  ],
-  navMenuItems: [
-    {
-      label: "Profile",
-      href: "/profile",
-    },
-    {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Projects",
-      href: "/projects",
-    },
-    {
-      label: "Team",
-      href: "/team",
-    },
-    {
-      label: "Settings",
-      href: "/settings",
-    },
-    {
-      label: "Help & Feedback",
-      href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
+      href: "/project",
     },
   ],
   links: {
     github: "https://github.com",
     docs: "/docs",
+    fpt: "https://fpt-is.com/",
+    fptCareers: "https://fpt.com/en/careers"
   },
 };

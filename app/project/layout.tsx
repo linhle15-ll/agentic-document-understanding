@@ -1,0 +1,18 @@
+import { SideNavBar } from "@/components/navbar";
+
+export default function ProjectLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="flex flex-row gap-4 items-start">
+      <SideNavBar />
+      <div className="bg-lightWhite w-full">
+        {children}
+      </div>
+    </section>
+  );
+}
+
+

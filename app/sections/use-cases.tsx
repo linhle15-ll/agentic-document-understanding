@@ -1,7 +1,5 @@
 'use client';
-import { title } from "@/components/primitives";
-import { Link } from "@heroui/link";
-import { button as buttonStyles } from "@heroui/theme";
+import { subtitle, title } from "@/components/primitives";
 import HorizontalScrollCarousel from "@/components/scroll-carousel";
 import { Landmark, ScrollText, ChartNoAxesCombined, Blocks, ShieldCheck } from 'lucide-react';
 import financeDoc from "@/public/use-cases/finance-doc.jpg";
@@ -13,54 +11,44 @@ import insuranceDoc from "@/public/use-cases/insurance-doc.jpg";
 const useCases = [
     {
         icon: <Landmark size={40} />,
-        cardTitle: "Financial Services",
+        name: "Financial Services",
         description: "Handle numeric data in large complex tables with accuracy, handle visually complex layouts in slides, financial statements and reports",
-        imgSrc: financeDoc
+        illustration: financeDoc
     },
     {
         icon: <ScrollText size={40} />,
-        cardTitle: "Scientific Paper",
+        name: "Scientific Paper",
         description: "Handle complex layouts, mathematical equations and chemical formulas, document structure",
-        imgSrc: scienceDoc
+        illustration: scienceDoc
     },
     {
         icon: <ChartNoAxesCombined size={40} />,
-        cardTitle: "Professional Services and Consulting",
+        name: "Professional Services and Consulting",
         description: "Handle varying layout structures on slides, client reports in different document standards, project proposals etc.",
-        imgSrc: consultDoc
+        illustration: consultDoc
     },
     {
         icon: <Blocks size={40} />,
-        cardTitle: "Manufacturing and Operations",
+        name: "Manufacturing and Operations",
         description: "Transform multimodal technical docs (product manuals, operation guides) featuring flow diagrams and technical drawings into actionable data with ease.",
-        imgSrc: manufactureDoc
+        illustration: manufactureDoc
     },
     {
         icon: <ShieldCheck size={40} />,
-        cardTitle: "Insurance",
+        name: "Insurance",
         description: "Handle complex tables, handwritten claim forms, invoices with accuracy.",
-        imgSrc: insuranceDoc
+        illustration: insuranceDoc
     },
 ]
 
 export default function ProductUseCases() {
     return (
-        <section className="bg-neutral-900 mt-20 flex flex-col items-center text-center w-full">
-            <div className={title({ color: "violet" })}>
-                <div className="max-w-7xl w-full mt-20"> Transforming Use Cases Across Sectors </div>
+        <section className="mt-20 flex flex-col items-center text-center w-full">
+            <div className={title({ class: "max-w-7xl w-full text-darkBlue" })}>
+                Transforming Use Cases Across Sectors
             </div>
-            <div className="flex gap-3 justify-center mt-8"> 
-                <Link
-                    isExternal
-                    className={buttonStyles({
-                        color: "primary",
-                        radius: "full",
-                        variant: "shadow",
-                    })}
-                    href="/settings"
-                >
-                    Get started
-                </Link>
+            <div className={subtitle({ class: "mt-4 max-w-3xl items-center" })}>
+                Unlock the power of intelligent document understanding for every industry. From finance and insurance to science, consulting, and manufacturing, our solution adapts to complex layouts and diverse formats—turning unstructured documents into actionable data.
             </div>
             <div>
                 <HorizontalScrollCarousel cards={useCases} />

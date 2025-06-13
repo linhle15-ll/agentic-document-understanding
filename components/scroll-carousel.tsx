@@ -1,37 +1,33 @@
-import { motion, useTransform, useScroll } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useCallback } from "react";
 import Image, { StaticImageData } from "next/image";
 import { ReactNode } from "react";
-import { title } from "@/components/primitives"
+import { title } from "./primitives";
 
-// Card type and component from card.tsx
 type CardProps = {
   icon: ReactNode;
-  cardTitle: string;
+  name: string;
   description: string;
-  imgSrc: StaticImageData | string;
+  illustration: StaticImageData | string;
 };
 
-function Card({ icon, cardTitle, description, imgSrc }: CardProps) {
+function Card({ icon, name, description, illustration }: CardProps) {
   return (
-    <div className="group relative block bg-black h-[450px] w-[450px] overflow-hidden rounded-xl">
+    <div className="group relative block bg-black h-[400px] w-[350px] overflow-hidden rounded-xl shrink-0 transition-transform duration-500 hover:scale-[1.02]">
       <Image
         alt="illustration use case"
-        src={imgSrc}
+        src={illustration}
         fill
-        className="absolute inset-0 h-full w-full object-cover opacity-75 transition-opacity group-hover:opacity-50"
+        className="absolute inset-0 h-full w-full object-cover opacity-75 transition-all duration-500 group-hover:scale-110 group-hover:opacity-50"
         style={{ objectFit: "cover" }}
       />
-      <div className="relative p-4 sm:p-6 lg:p-8 z-10 h-full flex flex-col justify-between">
-        <span className="text-white text-2xl font-bold mb-4">
+      <div className="relative p-6 sm:p-8 lg:p-10 z-10 h-full flex flex-col justify-between bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+        <span className="text-white text-2xl font-bold mb-4 transform transition-transform duration-500 group-hover:scale-110 group-hover:text-primary">
           {icon}
         </span>
-        <div className={`${title({ size: "sm" })} text-white`}>{cardTitle}</div>
-        <div className="mt-8">
-          <div
-            className="translate-y-8 transform opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100"
-          >
-            <p className="text-md text-white">{description}</p>
+        <div>
+          <div className={title({ size: "sm", class: "text-white text-base mb-4 transform transition-transform duration-500 group-hover:-translate-y-2" })}>{name}</div>
+          <div className="transform transition-all duration-500 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+            <p className="text-md text-gray-200">{description}</p>
           </div>
         </div>
       </div>
@@ -39,42 +35,17 @@ function Card({ icon, cardTitle, description, imgSrc }: CardProps) {
   );
 }
 
-export default function HorizontalScrollCarousel ({ cards } : { cards: CardProps[] }) {
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["10%", "-90%"]);
-
+export default function HorizontalScrollCarousel({ cards }: { cards: CardProps[] }) {
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-neutral-900 mt-0 w-screen overflow-hidden">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden w-screen">
-        <motion.div style={{ x }} className="flex gap-4">
-          {cards.map((card, idx) => (
-            <Card key={idx} {...card} />
-          ))}
-        </motion.div>
+    <div className="relative w-full overflow-hidden">
+      <div className="flex gap-8 py-12 overflow-x-auto snap-x snap-mandatory scrollbar-hide w-max">
+        {cards.map((card, index) => (
+          <div key={index} className="snap-center shrink-0 first:pl-8 last:pr-8">
+            <Card {...card} />
+          </div>
+        ))}
       </div>
-    </section>
+      {/* <div className="absolute left-0 top-0 h-full w-20 bg-gradient-to-r from-background to-transparent pointer-events-none"></div> */}
+    </div>
   );
-};
-
-// export default function CardScrollExample() {
-//   return (
-//     <div className="bg-neutral-800">
-//       <div className="flex h-48 items-center justify-center">
-//         <span className="font-semibold uppercase text-neutral-500">
-//           Scroll down
-//         </span>
-//       </div>
-//       <HorizontalScrollCarousel  />
-
-//       <div className="flex h-48 items-center justify-center">
-//         <span className="font-semibold uppercase text-neutral-500">
-//           Scroll up
-//         </span>
-//       </div>
-//     </div>
-//   );
-// }
+}
