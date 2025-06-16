@@ -6,7 +6,7 @@ const colorVariants = {
   fptOrange: "#F36F21",
   fptGreen: "#0DB14B",
   darkBlue: "#092156",
-}
+};
 
 export const title = tv({
   base: "tracking-tight inline font-semibold",
@@ -26,12 +26,7 @@ export const title = tv({
   },
   compoundVariants: [
     {
-      color: [
-        "fptBlue",
-        "fptOrange",
-        "fptGreen",
-        "darkBlue"
-      ],
+      color: ["fptBlue", "fptOrange", "fptGreen", "darkBlue"],
       class: "bg-clip-text text-transparent bg-gradient-to-b",
     },
   ],
@@ -56,13 +51,7 @@ export const subtitle = tv({
   },
   compoundVariants: [
     {
-      color: [
-        "foreground",
-        "fptBlue",
-        "fptOrange",
-        "fptGreen",
-        "darkBlue"
-      ],
+      color: ["foreground", "fptBlue", "fptOrange", "fptGreen", "darkBlue"],
       class: "bg-clip-text text-transparent bg-gradient-to-b",
     },
   ],

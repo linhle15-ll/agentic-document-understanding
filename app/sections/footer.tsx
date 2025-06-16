@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { title, subtitle } from "@/components/primitives";
-import { Linkedin, Facebook, Mail, Globe } from "lucide-react";
+import { Linkedin, Mail, Globe } from "lucide-react";
+import { Button } from "@heroui/react";
+
+import { title } from "@/components/primitives";
 import { siteConfig } from "@/config/site";
-import { Button } from "@heroui/button";
 
 export default function Footer() {
   return (
@@ -11,7 +12,14 @@ export default function Footer() {
         {/* Top Section */}
         <div className="mb-12 flex flex-col md:flex-row md:justify-between gap-8">
           <div>
-            <h2 className={title({ size: "lg", class: "mb-4 leading-tight lg:leading-snug"})}>Let Us Accompany You</h2>
+            <h2
+              className={title({
+                size: "lg",
+                class: "mb-4 leading-tight lg:leading-snug",
+              })}
+            >
+              Let Us Accompany You
+            </h2>
             <div className="flex flex-wrap gap-8 md:gap-16">
               <ul className="space-y-2 text-lg font-medium">
                 <li>
@@ -23,23 +31,32 @@ export default function Footer() {
               </ul>
               <ul className="space-y-2 text-lg font-medium">
                 <li>
-                  <Link href="/services">Services</Link>
+                  <Link href={siteConfig.links.fpt}>Services</Link>
                 </li>
                 <li>
                   <Link href="/contact">Contact</Link>
                 </li>
               </ul>
             </div>
-            <Button variant="shadow" color="secondary" className="mt-5"> <Link href="/contact">Contact us</Link></Button>
-
+            <Button className="mt-5" color="secondary" variant="shadow">
+              {" "}
+              <Link href="/contact">Contact us</Link>
+            </Button>
           </div>
           <div className="flex flex-col gap-2 text-sm text-gray-300">
-            <h3 className="text-lg font-bold text-white mb-2">Công ty TNHH FPT IS</h3>
+            <h3 className="text-lg font-bold text-white mb-2">
+              Công ty TNHH FPT IS
+            </h3>
             <p>
-              <span className="font-semibold">Registered Office:</span> Số 10 phố Phạm Văn Bạch, P. Dịch Vọng, Q. Cầu Giấy, TP. Hà Nội, Việt Nam
+              <span className="font-semibold">Registered Office:</span> Số 10
+              phố Phạm Văn Bạch, P. Dịch Vọng, Q. Cầu Giấy, TP. Hà Nội, Việt Nam
             </p>
             <p>
-              <span className="font-semibold">Content Management Responsibility:</span> Công ty TNHH FPT IS, <span className="font-semibold">BR No.</span> 0101601092
+              <span className="font-semibold">
+                Content Management Responsibility:
+              </span>{" "}
+              Công ty TNHH FPT IS, <span className="font-semibold">BR No.</span>{" "}
+              0101601092
             </p>
             <p>
               <span className="font-semibold">Hotline:</span> (+84) 24 7300 7373
@@ -61,22 +78,31 @@ export default function Footer() {
 
         {/* Social Icons */}
         <div className="flex gap-4 mb-6">
-          <a href="#" aria-label="LinkedIn">
+          <a
+            aria-label="LinkedIn"
+            href={siteConfig.links.linkedin}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="#" aria-label="Facebook">
-            <Facebook className="w-6 h-6" />
-          </a>
-          <a href="#" aria-label="Email">
+          <a aria-label="Email" href="mailto:Contact@fpt.com">
             <Mail className="w-6 h-6" />
           </a>
-          <a href="#" aria-label="Website">
+          <a
+            aria-label="Website"
+            href={siteConfig.links.fptIS}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <Globe className="w-6 h-6" />
           </a>
         </div>
 
         {/* Copyright */}
-        <p className="text-gray-400 text-xs p-3 text-center align-middle">&copy; {new Date().getFullYear()} FPT IS.</p>
+        <p className="text-gray-400 text-xs p-3 text-center align-middle">
+          &copy; {new Date().getFullYear()} FPT IS.
+        </p>
       </div>
     </footer>
   );

@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import {
   Navbar as HeroUINavbar,
@@ -9,7 +9,11 @@ import {
   NavbarItem,
   NavbarMenuItem,
 } from "@heroui/navbar";
-import { button as buttonStyles, link as linkStyles, Link } from "@heroui/react";
+import {
+  button as buttonStyles,
+  link as linkStyles,
+  Link,
+} from "@heroui/react";
 import NextLink from "next/link";
 import Image from "next/image";
 import {
@@ -23,11 +27,11 @@ import {
   BarChart2,
   Layers,
   Menu,
-  Building, 
+  Building,
   CircleDollarSign,
   Users,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
 } from "lucide-react";
 import clsx from "clsx";
 
@@ -41,7 +45,13 @@ export const MainNavbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Image src={FPTLogo.src} alt="FPT Logo" className="w-11 h-11 object-contain flex items-center justify-center" width={160} height={160}/>
+            <Image
+              alt="FPT Logo"
+              className="w-11 h-11 object-contain flex items-center justify-center"
+              height={160}
+              src={FPTLogo.src}
+              width={160}
+            />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
@@ -73,7 +83,7 @@ export const MainNavbar = () => {
               radius: "full",
               variant: "shadow",
             })}
-            href='/project'
+            href="/project"
           >
             Get started
           </Link>
@@ -85,7 +95,7 @@ export const MainNavbar = () => {
               radius: "full",
               variant: "bordered",
             })}
-            href='/contact'
+            href="/contact"
           >
             Contact
           </Link>
@@ -108,8 +118,8 @@ export const MainNavbar = () => {
                   index === 2
                     ? "primary"
                     : index === siteConfig.mainNavItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                      ? "danger"
+                      : "foreground"
                 }
                 href={item.href}
                 size="lg"
@@ -218,14 +228,17 @@ export const SideNavBar = () => {
       {/* Hamburger icon for mobile */}
       {!open && (
         <button
-          className="lg:hidden fixed top-4 right-4 z-50 rounded-full p-2 shadow"
-          onClick={() => setOpen(true)}
           aria-label="Open sidebar"
+          className="lg:hidden fixed top-4 right-4 z-50 rounded-full p-2 shadow"
+          style={{ all: "unset", cursor: "pointer" }}
+          tabIndex={0}
+          type="button"
+          onClick={() => setOpen(true)}
         >
           <Menu className="w-6 h-6" />
         </button>
       )}
-      
+
       {/* Sidebar */}
       <aside
         className={`
@@ -240,7 +253,9 @@ export const SideNavBar = () => {
           <nav className="flex-1 flex flex-col gap-6">
             {sideNavSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-2">
-                <div className="text-xs text-gray-500 font-medium">{section.title}</div>
+                <div className="text-xs text-gray-500 font-medium">
+                  {section.title}
+                </div>
                 <div className="flex flex-col gap-1">
                   {section.title === "Resources" ? (
                     <>
@@ -250,7 +265,9 @@ export const SideNavBar = () => {
                         onClick={() => setSettingsOpen((v) => !v)}
                       >
                         <Settings className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                        <span className="text-gray-900 hover:text-darkBlue text-sm">Settings</span>
+                        <span className="text-gray-900 hover:text-darkBlue text-sm">
+                          Settings
+                        </span>
                         {settingsOpen ? (
                           <ChevronUp className="w-4 h-4 ml-auto" />
                         ) : (
@@ -260,28 +277,34 @@ export const SideNavBar = () => {
                       {settingsOpen && (
                         <div className="ml-8 flex flex-col gap-1">
                           <Link
-                            href="/settings/organization"
                             className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            href="/settings/organization"
                             onClick={() => setOpen(false)}
                           >
                             <Building className="w-4 h-4 text-gray-900" />
-                            <span className="text-gray-900 text-sm">Organization</span>
+                            <span className="text-gray-900 text-sm">
+                              Organization
+                            </span>
                           </Link>
                           <Link
-                            href="/settings/members"
                             className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            href="/settings/members"
                             onClick={() => setOpen(false)}
                           >
                             <Users className="w-4 h-4 text-gray-900" />
-                            <span className="text-gray-900 text-sm">Members</span>
+                            <span className="text-gray-900 text-sm">
+                              Members
+                            </span>
                           </Link>
                           <Link
-                            href="/settings/billing"
                             className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            href="/settings/billing"
                             onClick={() => setOpen(false)}
                           >
                             <CircleDollarSign className="w-4 h-4 text-gray-900" />
-                            <span className="text-gray-900 text-sm">Billing</span>
+                            <span className="text-gray-900 text-sm">
+                              Billing
+                            </span>
                           </Link>
                         </div>
                       )}
@@ -289,17 +312,24 @@ export const SideNavBar = () => {
                       {section.items
                         .filter(
                           (item) =>
-                            !["Settings", "Organization", "Members", "Billing"].includes(item.label)
+                            ![
+                              "Settings",
+                              "Organization",
+                              "Members",
+                              "Billing",
+                            ].includes(item.label),
                         )
                         .map((item) => (
                           <Link
                             key={item.href}
-                            href={item.href}
                             className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            href={item.href}
                             onClick={() => setOpen(false)}
                           >
                             <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                            <span className="text-gray-900 hover:text-darkBlue text-sm">{item.label}</span>
+                            <span className="text-gray-900 hover:text-darkBlue text-sm">
+                              {item.label}
+                            </span>
                           </Link>
                         ))}
                     </>
@@ -307,12 +337,14 @@ export const SideNavBar = () => {
                     section.items.map((item) => (
                       <Link
                         key={item.href}
-                        href={item.href}
                         className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                        href={item.href}
                         onClick={() => setOpen(false)}
                       >
                         <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                        <span className="text-gray-900 hover:text-darkBlue text-sm">{item.label}</span>
+                        <span className="text-gray-900 hover:text-darkBlue text-sm">
+                          {item.label}
+                        </span>
                       </Link>
                     ))
                   )}
@@ -323,7 +355,9 @@ export const SideNavBar = () => {
         </div>
         {/* User info */}
         <div className="relative mt-5 mb-0 flex items-center gap-2 py-2 px-2 rounded-lg">
-          <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-medium">N</div>
+          <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-medium">
+            N
+          </div>
           <div>
             <div className="font-medium">Ngoc Linh Le</div>
             <div className="text-xs text-gray-500">Free Plan</div>
@@ -332,8 +366,12 @@ export const SideNavBar = () => {
       </aside>
       {/* Overlay for mobile */}
       {open && (
-        <div
+        <button
+          aria-label="Close sidebar"
           className="fixed inset-0 bg-black bg-opacity-30 z-30 lg:hidden"
+          style={{ all: "unset", cursor: "pointer" }}
+          tabIndex={0}
+          type="button"
           onClick={() => setOpen(false)}
         />
       )}

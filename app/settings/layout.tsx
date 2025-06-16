@@ -8,11 +8,7 @@ export default function SettingsLayout({
   return (
     <section className="flex flex-row gap-4 items-start">
       <SideNavBar />
-      <div className="bg-lightWhite w-full">
-        {children}
-      </div>
+      <div className="bg-lightWhite w-full">{children}</div>
     </section>
   );
 }
-
-

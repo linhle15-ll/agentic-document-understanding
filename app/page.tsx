@@ -1,19 +1,18 @@
-'use client';
+"use client";
 import { Link } from "@heroui/link";
 import { Snippet } from "@heroui/snippet";
 import { Code } from "@heroui/code";
 import { button as buttonStyles } from "@heroui/theme";
 
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/commons/icons";
-
-import Footer from "@/app/sections/footer";
-import ClientSlider from "@/components/home.components/client-slider";
 import ProductBenefits from "./sections/benefits";
 import ProductUseCases from "./sections/use-cases";
 import ProductFeatures from "./sections/features";
 import ActionCall from "./sections/action-call";
+
+import { siteConfig } from "@/config/site";
+import { title, subtitle } from "@/components/primitives";
+import { GithubIcon } from "@/components/commons/icons";
+import Footer from "@/app/sections/footer";
 import { MainNavbar } from "@/components/commons/navbar";
 export default function Home() {
   return (
@@ -22,9 +21,24 @@ export default function Home() {
       <div className="flex flex-col items-center w-full">
         <section className="flex flex-col items-center gap-4 py-10 w-full">
           <div className="flex flex-col gap-4 items-center text-center m-16 w-full bg-lightWhite">
-            <div className={title({ class: "text-darkBlue pb-4 leading-tight lg:leading-snug", size: "lg" })}> Intelligent Document Understanding </div>
-            <div className={subtitle({ class: "mt-4 max-w-3xl leading-tight lg:leading-snug" })}>
-              Agentic document extraction captures important details – including the different form fields, tables, and checkboxes – and provides accurate descriptions for these elements based on their visual layout. So you can prepare data for downstream applications
+            <div
+              className={title({
+                class: "text-darkBlue pb-4 leading-tight lg:leading-snug",
+                size: "lg",
+              })}
+            >
+              {" "}
+              Intelligent Document Understanding{" "}
+            </div>
+            <div
+              className={subtitle({
+                class: "mt-4 max-w-3xl leading-tight lg:leading-snug",
+              })}
+            >
+              Agentic document extraction captures important details – including
+              the different form fields, tables, and checkboxes – and provides
+              accurate descriptions for these elements based on their visual
+              layout. So you can prepare data for downstream applications
             </div>
           </div>
           <div className="flex gap-3 justify-center">
@@ -52,7 +66,10 @@ export default function Home() {
           <div className="mt-8 flex justify-center">
             <Snippet hideCopyButton hideSymbol variant="bordered">
               <span>
-                Get started with <Link href="/project"><Code color="primary">playground</Code></Link>
+                Get started with{" "}
+                <Link href="/project">
+                  <Code color="primary">playground</Code>
+                </Link>
               </span>
             </Snippet>
           </div>

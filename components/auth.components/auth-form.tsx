@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import React from "react";
 import Image from "next/image";
-import { subtitle } from "@/components/primitives"
 import { Form, Input, Button, Link } from "@heroui/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+
+import { subtitle } from "@/components/primitives";
 import fptLogo from "@/public/commons/fpt-logo.png";
 
 export default function AuthForm({ isSignUp = true }: { isSignUp?: boolean }) {
@@ -14,13 +15,20 @@ export default function AuthForm({ isSignUp = true }: { isSignUp?: boolean }) {
       <div className="flex flex-col items-center gap-2 mt-2">
         <div className="w-12 h-12 rounded-full flex items-center justify-center">
           {/* You can put your logo SVG here */}
-          <Image src={fptLogo} alt="Logo" className="w-11 h-11" />
+          <Image alt="Logo" className="w-11 h-11" src={fptLogo} />
         </div>
-        <span className="text-2xl font-bold text-gray-800">Agentic Document Understanding</span>
+        <span className="text-2xl font-bold text-gray-800">
+          Agentic Document Understanding
+        </span>
       </div>
       {/* Title */}
       <div className="text-center mt-2">
-        <div className={subtitle({size:"lg", class:"font-semibold text-primary leading-tight lg:leading-snug"})}>
+        <div
+          className={subtitle({
+            size: "lg",
+            class: "font-semibold text-primary leading-tight lg:leading-snug",
+          })}
+        >
           {isSignUp ? "Create your account" : "Sign in to your account"}
         </div>
       </div>
@@ -34,7 +42,12 @@ export default function AuthForm({ isSignUp = true }: { isSignUp?: boolean }) {
           type="email"
           variant="faded"
         />
-        <Button color="primary" variant="solid" type="submit" className="w-full">
+        <Button
+          className="w-full"
+          color="primary"
+          type="submit"
+          variant="solid"
+        >
           {isSignUp ? "Create account" : "Sign in"}
         </Button>
       </Form>
@@ -42,13 +55,23 @@ export default function AuthForm({ isSignUp = true }: { isSignUp?: boolean }) {
       <div className="text-center text-gray-700">
         {isSignUp ? (
           <>
-            Already had an account?{" "}
-            <Link href="/sign-in" className="font-semibold text-blue-700 hover:underline">Sign in</Link>
+            Already had an account?
+            <Link
+              className="font-semibold text-blue-700 hover:underline"
+              href="/sign-in"
+            >
+              Sign in
+            </Link>
           </>
         ) : (
           <>
-            Don't have an account?{" "}
-            <Link href="/sign-up" className="font-semibold text-blue-700 hover:underline">Sign up</Link>
+            Don&apos;t have an account?
+            <Link
+              className="font-semibold text-blue-700 hover:underline"
+              href="/sign-up"
+            >
+              Sign up
+            </Link>
           </>
         )}
       </div>
@@ -71,9 +94,15 @@ export default function AuthForm({ isSignUp = true }: { isSignUp?: boolean }) {
       </div>
       {/* Terms */}
       <div className="text-xs text-gray-500 text-center mt-2">
-        By continuing, you agree to the{" "}
-        <a href="#" className="underline">Terms of Use</a> and{" "}
-        <a href="#" className="underline">Privacy Policy</a>.
+        By continuing, you agree to the
+        <a className="underline" href="/terms-of-use">
+          Terms of Use
+        </a>
+        and
+        <a className="underline" href="/privacy-policy">
+          Privacy Policy
+        </a>
+        .
       </div>
     </div>
   );

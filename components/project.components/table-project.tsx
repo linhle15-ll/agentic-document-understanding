@@ -1,5 +1,5 @@
 // components/ReusableTable.tsx
-'use client';
+"use client";
 import React from "react";
 import {
   Table,
@@ -14,6 +14,7 @@ import {
 import { Trash2 } from "lucide-react";
 import { useInfiniteScroll } from "@heroui/use-infinite-scroll";
 import { useAsyncList } from "@react-stately/data";
+
 import { ProjectExtractionProps } from "@/types";
 import { ProjectApiProps } from "@/types";
 
@@ -49,8 +50,8 @@ export function ProjectTable<T>({
   return (
     <Table
       isHeaderSticky
-      baseRef={scrollerRef}
       aria-label="Reusable table"
+      baseRef={scrollerRef}
       bottomContent={
         hasMore ? (
           <div className="flex w-full justify-center">
@@ -69,18 +70,22 @@ export function ProjectTable<T>({
         ))}
       </TableHeader>
 
-      <TableBody isLoading={isLoading} items={items} loadingContent={<Spinner color="white" />}>
+      <TableBody
+        isLoading={isLoading}
+        items={items}
+        loadingContent={<Spinner color="white" />}
+      >
         {(item: T) => (
           <TableRow key={getRowKey(item)}>
             {columns.map((col) => (
-                <TableCell key={col.key}>
-                    {col.renderCell
-                        ? col.renderCell(item)
-                        : getKeyValue(item, col.key)}
-                    </TableCell>
-                ))}
-                </TableRow>
-                )}
+              <TableCell key={col.key}>
+                {col.renderCell
+                  ? col.renderCell(item)
+                  : getKeyValue(item, col.key)}
+              </TableCell>
+            ))}
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );
@@ -98,6 +103,7 @@ export function TableExtraction() {
       const json = await res.json();
 
       setHasMore(json.next !== null);
+
       return { items: json.results, cursor: json.next };
     },
   });
@@ -109,24 +115,24 @@ export function TableExtraction() {
         { key: "createdAt", label: "Created At" },
         { key: "lastUpdated", label: "Last Updated" },
         { key: "_id", label: "ID" },
-        { 
-            key: "action", 
-            label: "Action",
-            renderCell: (item) => (
-                <button
-                    className="p-1 rounded hover:bg-red-100 flex items-center justify-center"
-                    title="Delete"
-                >
-                    <Trash2 size={16} className="text-red-500" />
-                </button>
-            )
+        {
+          key: "action",
+          label: "Action",
+          renderCell: () => (
+            <button
+              className="p-1 rounded hover:bg-red-100 flex items-center justify-center"
+              title="Delete"
+            >
+              <Trash2 className="text-red-500" size={16} />
+            </button>
+          ),
         },
       ]}
-      items={list.items}
-      isLoading={isLoading}
-      hasMore={hasMore}
-      onLoadMore={list.loadMore}
       getRowKey={(item) => item._id}
+      hasMore={hasMore}
+      isLoading={isLoading}
+      items={list.items}
+      onLoadMore={list.loadMore}
     />
   );
 }
@@ -143,6 +149,7 @@ export function TableAPI() {
       const json = await res.json();
 
       setHasMore(json.next !== null);
+
       return { items: json.results, cursor: json.next };
     },
   });
@@ -154,24 +161,24 @@ export function TableAPI() {
         { key: "createdAt", label: "Created At" },
         { key: "lastUpdated", label: "Last Updated" },
         { key: "APIKey", label: "API Key" },
-        { 
-            key: "action", 
-            label: "Action",
-            renderCell: (item) => (
-                <button
-                    className="p-1 rounded hover:bg-red-100 flex items-center justify-center"
-                    title="Delete"
-                >
-                    <Trash2 size={16} className="text-red-500" />
-                </button>
-            )
+        {
+          key: "action",
+          label: "Action",
+          renderCell: () => (
+            <button
+              className="p-1 rounded hover:bg-red-100 flex items-center justify-center"
+              title="Delete"
+            >
+              <Trash2 className="text-red-500" size={16} />
+            </button>
+          ),
         },
       ]}
-      items={list.items}
-      isLoading={isLoading}
-      hasMore={hasMore}
-      onLoadMore={list.loadMore}
       getRowKey={(item) => item.APIKey}
+      hasMore={hasMore}
+      isLoading={isLoading}
+      items={list.items}
+      onLoadMore={list.loadMore}
     />
   );
 }

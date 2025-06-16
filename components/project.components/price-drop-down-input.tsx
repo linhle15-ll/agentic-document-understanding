@@ -1,8 +1,15 @@
-'use client'
+"use client";
 
 import type { Selection } from "@heroui/react";
+
 import React from "react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@heroui/react";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Button,
+} from "@heroui/react";
 import { Info } from "lucide-react";
 
 function Badge({ children }: { children: React.ReactNode }) {
@@ -14,7 +21,9 @@ function Badge({ children }: { children: React.ReactNode }) {
 }
 
 export default function PriceDropdown() {
-  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set(["balanced"]));
+  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
+    new Set(["balanced"]),
+  );
 
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replace(/_/g, ""),
@@ -31,33 +40,33 @@ export default function PriceDropdown() {
       <DropdownMenu
         disallowEmptySelection
         aria-label="Preset selection"
+        className="min-w-[320px]"
         selectedKeys={selectedKeys}
         selectionMode="single"
         variant="flat"
         onSelectionChange={setSelectedKeys}
-        className="min-w-[320px]"
       >
         <DropdownItem
           key="fast"
           description="Simple, text-only documents"
-          startContent={<Info size={16} className="text-gray-400 mr-2" />}
           endContent={<Badge>1 cred.</Badge>}
+          startContent={<Info className="text-gray-400 mr-2" size={16} />}
         >
           Fast
         </DropdownItem>
         <DropdownItem
           key="balanced"
           description="Documents with tables and images"
-          startContent={<Info size={16} className="text-gray-400 mr-2" />}
           endContent={<Badge>3 cred.</Badge>}
+          startContent={<Info className="text-gray-400 mr-2" size={16} />}
         >
           Balanced
         </DropdownItem>
         <DropdownItem
           key="premium"
           description="Complex documents with tables and images"
-          startContent={<Info size={16} className="text-gray-400 mr-2" />}
           endContent={<Badge>45 cred.</Badge>}
+          startContent={<Info className="text-gray-400 mr-2" size={16} />}
         >
           Premium
         </DropdownItem>
@@ -66,21 +75,27 @@ export default function PriceDropdown() {
           description="Choose your own configuration"
           endContent={
             <>
-              <span className="bg-blue-100 text-fptBlue px-2 py-0.5 rounded-full text-xs font-semibold mr-2">Advanced</span>
+              <span className="bg-blue-100 text-fptBlue px-2 py-0.5 rounded-full text-xs font-semibold mr-2">
+                Advanced
+              </span>
               <Badge>1 - 45 cred.</Badge>
             </>
           }
         >
           Custom
         </DropdownItem>
-        <DropdownItem isReadOnly className="text-xs text-gray-500 mt-2 mb-1" key="section">
+        <DropdownItem
+          key="section"
+          isReadOnly
+          className="text-xs text-gray-500 mt-2 mb-1"
+        >
           Use-case oriented presets
         </DropdownItem>
         <DropdownItem
           key="complex_tables"
           description="For invoices and receipts"
-          startContent={<Info size={16} className="text-gray-400 mr-2" />}
           endContent={<Badge>90 cred.</Badge>}
+          startContent={<Info className="text-gray-400 mr-2" size={16} />}
         >
           Complex tables
         </DropdownItem>

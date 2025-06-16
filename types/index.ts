@@ -7,27 +7,27 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-export interface CardProps{
-  name: string ;
+export interface CardProps {
+  name: string;
   description?: string | string[];
   descriptionArr?: string[];
-  illustration?: StaticImageData | StaticImport | string ;
+  illustration?: StaticImageData | StaticImport | string;
   href?: string;
-  icon?: React.ReactNode ;
+  icon?: React.ReactNode;
   documentation?: string;
   playground?: string;
 }
 
-export interface ProjectProps{
+export interface ProjectProps {
   label: string;
   key: string;
   createdAt: string;
   updatedAt: string;
-  actions: string[] // Use switch case to determine actions
+  actions: string[]; // Use switch case to determine actions
 }
 
 export interface ProjectExtractionProps extends ProjectProps {
-  _id: string,
+  _id: string;
 }
 
 export interface ProjectApiProps extends ProjectProps {

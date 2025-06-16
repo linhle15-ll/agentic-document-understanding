@@ -1,11 +1,12 @@
 import Image from "next/image";
+
 import { title } from "@/components/primitives";
 import { CardProps } from "@/types/index";
 import benefit1 from "@/public/benefits/benefit1.webp";
 import benefit2 from "@/public/benefits/benefit2.webp";
 import PlaceHolderImg from "@/public/commons/placeholder-image.jpg";
 // TODO: Add benefits illustration of this product
-const benefits = [  
+const benefits = [
   {
     name: "Complex Layout Extraction",
     descriptionArr: [
@@ -25,31 +26,31 @@ const benefits = [
     ],
     illustration: benefit2,
     alt: "Benefit 2: Accurate Extraction of Tables and Charts",
-  }
-]
+  },
+];
 
 const BenefitCard = ({ name, descriptionArr, illustration }: CardProps) => {
   return (
     <div className="w-full py-8 px-2">
       <div
-        className={"flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12"}
+        className={
+          "flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12"
+        }
       >
         <div className="flex-1 flex flex-col items-start w-full">
           <h3 className="text-2xl font-bold mb-6 text-left">{name}</h3>
           <ul className="list-disc pl-6 text-base flex flex-col gap-2 items-start text-left">
-            {descriptionArr?.map((desc, i) => (
-              <li key={i}>{desc}</li>
-            ))}
+            {descriptionArr?.map((desc, i) => <li key={i}>{desc}</li>)}
           </ul>
         </div>
         <div className="flex-1 flex justify-center w-full max-w-xl">
           <Image
-            src={illustration || PlaceHolderImg}
-            alt={name}
-            width={600}
-            height={400}
-            className="rounded-lg object-cover w-full h-auto max-w-full"
             priority
+            alt={name}
+            className="rounded-lg object-cover w-full h-auto max-w-full"
+            height={400}
+            src={illustration || PlaceHolderImg}
+            width={600}
           />
         </div>
       </div>
@@ -61,16 +62,22 @@ export default function ProductBenefits() {
   return (
     <div>
       <section className="flex flex-col gap-5 items-center text-center w-full max-w-7xl mt-20 px-8">
-        <div className={title({ size: "md", class: "pb-4 text-darkBlue leading-tight lg:leading-snug" })}>
+        <div
+          className={title({
+            size: "md",
+            class: "pb-4 text-darkBlue leading-tight lg:leading-snug",
+          })}
+        >
           Why Agentic Document Understanding?
         </div>
         {benefits.map((benefit, index) => (
-          <BenefitCard 
+          <BenefitCard
             key={index}
-            name={benefit.name}
             descriptionArr={benefit.descriptionArr}
             illustration={benefit.illustration}
-          />))}
+            name={benefit.name}
+          />
+        ))}
       </section>
     </div>
   );
