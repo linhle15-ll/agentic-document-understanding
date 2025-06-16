@@ -6,12 +6,12 @@ import { Button } from "@heroui/button";
 
 export default function Footer() {
   return (
-    <footer className="w-screen bg-darkBlue text-white pt-16 mt-20 pb-8 px-4 md:px-0">
+    <footer className="w-screen bg-darkBlue text-white pt-16 mt-20 pb-8 px-5 md:px-8 sm:px-8">
       <div className="max-w-screen-xl mx-auto">
         {/* Top Section */}
         <div className="mb-12 flex flex-col md:flex-row md:justify-between gap-8">
           <div>
-            <h2 className={title({ size: "lg" }) + " mb-4"}>Let Us Accompany You</h2>
+            <h2 className={title({ size: "lg", class: "mb-4 leading-tight lg:leading-snug"})}>Let Us Accompany You</h2>
             <div className="flex flex-wrap gap-8 md:gap-16">
               <ul className="space-y-2 text-lg font-medium">
                 <li>
@@ -30,7 +30,7 @@ export default function Footer() {
                 </li>
               </ul>
             </div>
-            <Button href="/contact" variant="shadow" color="secondary" className="mt-5"> Contact Us </Button>
+            <Button variant="shadow" color="secondary" className="mt-5"> <Link href="/contact">Contact us</Link></Button>
 
           </div>
           <div className="flex flex-col gap-2 text-sm text-gray-300">
@@ -57,7 +57,6 @@ export default function Footer() {
           <Link href="/vulnerability">Vulnerability Disclosure</Link>
           <Link href="/data-protection">Data Protection Policy</Link>
           <Link href="/risk-reporting">Risk Violation Reporting</Link>
-          <Link href="/procurement">Procurement @ FPT Software</Link>
         </div>
 
         {/* Social Icons */}

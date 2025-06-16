@@ -2,8 +2,17 @@
 import { subtitle } from "@/components/primitives";
 import { Input } from "@heroui/input";
 import { FileOutput } from "lucide-react";
-import ModalComponent from "@/components/modal";
-import TableExtraction from "@/components/project.components/table-extraction";
+import ModalComponent from "@/components/commons/modal";
+import { TableExtraction } from "@/components/project.components/table-project";
+
+const projectColumns = [
+  {label: "ID", key: "_id"},
+  {label: "Title", key: "title"},
+  {label: "Created at", key: "createdAt"},
+  {label: "Updated at", key: "updatedAt"},
+  {label: "Actions", key: "actions"},
+];
+
 
 export default function ExtractDocAgentPage() {
     const AgentCreateModal = (
@@ -20,7 +29,7 @@ export default function ExtractDocAgentPage() {
                             <div>
                                 <div className="flex flex-row gap-1 items-center">
                                     <FileOutput size={35} className="text-fptOrange font-semibold" />
-                                    <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue" })}>
+                                    <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue leading-tight lg:leading-snug" })}>
                                         Document Extraction
                                     </div>
                                 </div>
@@ -36,7 +45,7 @@ export default function ExtractDocAgentPage() {
                     </div>
                 </div>
 
-                {/* Main */}
+                {/* Main - Extraction Project Table */}
                 <TableExtraction />
             </div>
         </div>

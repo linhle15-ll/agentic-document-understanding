@@ -20,7 +20,7 @@ export default function AuthForm({ isSignUp = true }: { isSignUp?: boolean }) {
       </div>
       {/* Title */}
       <div className="text-center mt-2">
-        <div className={subtitle({size:"lg", class:"font-semibold text-primary"})}>
+        <div className={subtitle({size:"lg", class:"font-semibold text-primary leading-tight lg:leading-snug"})}>
           {isSignUp ? "Create your account" : "Sign in to your account"}
         </div>
       </div>

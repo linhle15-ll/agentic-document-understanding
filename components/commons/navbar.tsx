@@ -1,4 +1,5 @@
 'use client'
+import React from "react";
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -21,19 +22,22 @@ import {
   Mail,
   BarChart2,
   Layers,
-  Menu
+  Menu,
+  Building, 
+  CircleDollarSign,
+  Users,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
-import { GithubIcon } from "@/components/icons";
+import { GithubIcon } from "@/components/commons/icons";
 import FPTLogo from "@/public/commons/fpt-logo.png";
-
-import { useState } from "react";
 
 export const MainNavbar = () => {
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+    <HeroUINavbar position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -157,13 +161,28 @@ const sideNavSections = [
         icon: Settings,
       },
       {
+        label: "Organization",
+        href: "/settings/organization",
+        icon: Building,
+      },
+      {
+        label: "Members",
+        href: "/settings/members",
+        icon: Users,
+      },
+      {
+        label: "Billing",
+        href: "/settings/billing",
+        icon: CircleDollarSign,
+      },
+      {
         label: "Integrations",
         href: "/integrations",
         icon: Layers,
       },
       {
-        label: "API Keys",
-        href: "/api-keys",
+        label: "API Key",
+        href: "/project/api-key",
         icon: KeyRound,
       },
       {
@@ -191,7 +210,8 @@ const sideNavSections = [
 ];
 
 export const SideNavBar = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const [settingsOpen, setSettingsOpen] = React.useState(false);
 
   return (
     <>
@@ -209,55 +229,93 @@ export const SideNavBar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed w-64 bg-white border-r z-40 transform transition-transform
+          fixed h-screen w-64 bg-white border-r z-40 transform transition-transform
           ${open ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:block
           flex flex-col px-4 py-6
         `}
       >
-        {/* Close button for mobile */}
-        <button
-          className="lg:hidden absolute top-4 right-4"
-          onClick={() => setOpen(false)}
-          aria-label="Close sidebar"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-        {/* Logo */}
-        <div className="flex items-center gap-2 mb-8 mt-2">
-          <Image src={FPTLogo.src} alt="FPT Logo" className="w-11 h-11 object-contain flex items-center justify-center" width={40} height={40} />
-          <span className="font-bold text-xl">Document Understanding</span>
-        </div>
-        {/* Org Switcher */}
-        <div className="bg-blue-50 rounded-sm px-3 py-2 mb-6 flex flex-col">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center font-medium">N</div>
-            <div>
-              <div className="font-medium">Default</div>
-              <div className="text-xs text-gray-500">Ngọc Linh Lê's Org</div>
-            </div>
-          </div>
-        </div>
-        {/* Navigation */}
+        {/* ...logo, org switcher, etc... */}
         <div className="flex-1 min-h-0 overflow-y-auto pr-1">
           <nav className="flex-1 flex flex-col gap-6">
             {sideNavSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-2">
                 <div className="text-xs text-gray-500 font-medium">{section.title}</div>
                 <div className="flex flex-col gap-1">
-                  {section.items.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
-                      onClick={() => setOpen(false)}
-                    >
-                      <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                      <span className="text-gray-900 hover:text-darkBlue text-sm">{item.label}</span>
-                    </Link>
-                  ))}
+                  {section.title === "Resources" ? (
+                    <>
+                      {/* Settings with subpanel */}
+                      <button
+                        className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text w-full text-left"
+                        onClick={() => setSettingsOpen((v) => !v)}
+                      >
+                        <Settings className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
+                        <span className="text-gray-900 hover:text-darkBlue text-sm">Settings</span>
+                        {settingsOpen ? (
+                          <ChevronUp className="w-4 h-4 ml-auto" />
+                        ) : (
+                          <ChevronDown className="w-4 h-4 ml-auto" />
+                        )}
+                      </button>
+                      {settingsOpen && (
+                        <div className="ml-8 flex flex-col gap-1">
+                          <Link
+                            href="/settings/organization"
+                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            onClick={() => setOpen(false)}
+                          >
+                            <Building className="w-4 h-4 text-gray-900" />
+                            <span className="text-gray-900 text-sm">Organization</span>
+                          </Link>
+                          <Link
+                            href="/settings/members"
+                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            onClick={() => setOpen(false)}
+                          >
+                            <Users className="w-4 h-4 text-gray-900" />
+                            <span className="text-gray-900 text-sm">Members</span>
+                          </Link>
+                          <Link
+                            href="/settings/billing"
+                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            onClick={() => setOpen(false)}
+                          >
+                            <CircleDollarSign className="w-4 h-4 text-gray-900" />
+                            <span className="text-gray-900 text-sm">Billing</span>
+                          </Link>
+                        </div>
+                      )}
+                      {/* Render the rest of the section except Settings, Organization, Members, Billing */}
+                      {section.items
+                        .filter(
+                          (item) =>
+                            !["Settings", "Organization", "Members", "Billing"].includes(item.label)
+                        )
+                        .map((item) => (
+                          <Link
+                            key={item.href}
+                            href={item.href}
+                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                            onClick={() => setOpen(false)}
+                          >
+                            <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
+                            <span className="text-gray-900 hover:text-darkBlue text-sm">{item.label}</span>
+                          </Link>
+                        ))}
+                    </>
+                  ) : (
+                    section.items.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                        onClick={() => setOpen(false)}
+                      >
+                        <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
+                        <span className="text-gray-900 hover:text-darkBlue text-sm">{item.label}</span>
+                      </Link>
+                    ))
+                  )}
                 </div>
               </div>
             ))}

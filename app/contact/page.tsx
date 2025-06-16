@@ -9,7 +9,7 @@ export default function ContactPage() {
   return (
     <div className="text-left max-w-2xl mx-auto rounded-2xl bg-white sm:shadow sm:p-8 p-4 flex flex-col gap-6 shadow-none mt-4">
       <div className="flex flex-col gap-2">
-        <div className={title({size:"md", class:"font-semibold text-primary"})}>Talk to Sales</div>
+        <div className={title({size:"md", class:"font-semibold text-primary leading-tight lg:leading-snug"})}>Talk to Sales</div>
         <p className="text-lg text-gray-500">
           Tell us about your needs and we will get back to you as soon as possible.
         </p>

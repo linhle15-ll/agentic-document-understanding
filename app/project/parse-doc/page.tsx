@@ -12,7 +12,7 @@ import invoice from '@/public/use-cases/invoice-doc.webp';
 import labReport from '@/public/use-cases/lab-report-doc.webp';
 import performanceChart from '@/public/use-cases/performance-doc.jpg';
 import accidentStatement from '@/public/use-cases/accident-statement-doc.png';
-import ModalComponent from "@/components/modal";
+import ModalComponent from "@/components/commons/modal";
 
 const exampleFiles = [
   {
@@ -55,7 +55,7 @@ function Card({ name, descriptionArr, illustration }: CardProps) {
         <div className="flex items-center justify-center w-full flex-1">
           {illustration && (
             <Image
-              src={typeof illustration === 'string' ? illustration : illustration.src}
+              src={illustration}
               alt={name}
               className="object-contain rounded-md bg-white border border-gray-200"
               width={140}
@@ -124,7 +124,7 @@ export default function ParseDocPage() {
               <div>
                 <div className="flex flex-row gap-1 items-center">
                   <FileCode2 size={35} className="text-fptGreen font-semibold" />
-                  <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue" })}>
+                  <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue leading-tight lg:leading-snug" })}>
                     Document Parsing
                   </div>
                 </div>

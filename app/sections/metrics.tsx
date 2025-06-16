@@ -7,7 +7,7 @@ export default function ProductMetrics() {
     return (
         <section className="mt-20 flex flex-col md:flex-row items-center justify-center text-center gap-10 md:gap-20 w-full px-4">
             <div className="flex flex-col gap-5 w-full max-w-md">
-                <div className={subtitle({ size: "md", class:"text-gray-900 font-semibold" })}>Original Document</div>
+                <div className={subtitle({ size: "md", class:"text-gray-900 font-semibold mb-4 leading-tight lg:leading-snug" })}>Original Document</div>
                 <div className="rounded-lg shadow-lg bg-white p-2 flex items-center justify-center">
                     <Image
                         src={originalDoc}

@@ -1,6 +1,6 @@
 'use client';
 import { subtitle, title } from "@/components/primitives";
-import HorizontalScrollCarousel from "@/components/scroll-carousel";
+import HorizontalScrollCarousel from "@/components/home.components/scroll-carousel";
 import { Landmark, ScrollText, ChartNoAxesCombined, Blocks, ShieldCheck } from 'lucide-react';
 import financeDoc from "@/public/use-cases/finance-doc.jpg";
 import scienceDoc from "@/public/use-cases/science-doc.png";
@@ -44,13 +44,13 @@ const useCases = [
 export default function ProductUseCases() {
     return (
         <section className="mt-20 flex flex-col items-center text-center w-full">
-            <div className={title({ class: "max-w-7xl w-full text-darkBlue" })}>
+            <div className={title({ class: "max-w-7xl w-full text-darkBlue leading-tight lg:leading-snug" })}>
                 Transforming Use Cases Across Sectors
             </div>
             <div className={subtitle({ class: "mt-4 max-w-3xl items-center" })}>
                 Unlock the power of intelligent document understanding for every industry. From finance and insurance to science, consulting, and manufacturing, our solution adapts to complex layouts and diverse formats—turning unstructured documents into actionable data.
             </div>
-            <div>
+            <div className="w-full overflow-x-auto">
                 <HorizontalScrollCarousel cards={useCases} />
             </div>
             

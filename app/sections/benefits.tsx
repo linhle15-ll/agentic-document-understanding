@@ -25,17 +25,14 @@ const benefits = [
     ],
     illustration: benefit2,
     alt: "Benefit 2: Accurate Extraction of Tables and Charts",
-    reverse: true,
   }
 ]
 
-const BenefitCard = ({ name, descriptionArr, illustration, reverse }: CardProps) => {
+const BenefitCard = ({ name, descriptionArr, illustration }: CardProps) => {
   return (
     <div className="w-full py-8 px-2">
       <div
-        className={`flex flex-col-reverse md:flex-row ${
-          reverse ? "md:flex-row-reverse" : ""
-        } items-center gap-8 md:gap-12`}
+        className={"flex flex-col-reverse md:flex-row items-center gap-8 md:gap-12"}
       >
         <div className="flex-1 flex flex-col items-start w-full">
           <h3 className="text-2xl font-bold mb-6 text-left">{name}</h3>
@@ -48,7 +45,7 @@ const BenefitCard = ({ name, descriptionArr, illustration, reverse }: CardProps)
         <div className="flex-1 flex justify-center w-full max-w-xl">
           <Image
             src={illustration || PlaceHolderImg}
-            alt={name ?? ""}
+            alt={name}
             width={600}
             height={400}
             className="rounded-lg object-cover w-full h-auto max-w-full"
@@ -63,8 +60,8 @@ const BenefitCard = ({ name, descriptionArr, illustration, reverse }: CardProps)
 export default function ProductBenefits() {
   return (
     <div>
-      <section className="flex flex-col gap-5 items-center w-full max-w-7xl mt-20">
-        <div className={title({ class: "pb-4 text-darkBlue" })}>
+      <section className="flex flex-col gap-5 items-center text-center w-full max-w-7xl mt-20 px-8">
+        <div className={title({ size: "md", class: "pb-4 text-darkBlue leading-tight lg:leading-snug" })}>
           Why Agentic Document Understanding?
         </div>
         {benefits.map((benefit, index) => (
@@ -73,7 +70,6 @@ export default function ProductBenefits() {
             name={benefit.name}
             descriptionArr={benefit.descriptionArr}
             illustration={benefit.illustration}
-            reverse={benefit.reverse}
           />))}
       </section>
     </div>

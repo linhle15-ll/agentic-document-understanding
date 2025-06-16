@@ -10,8 +10,8 @@ function Card({ name, description, icon, documentation, playground }: CardProps)
   return (
     <div className="relative bg-white border-gray-200 shadow-lg rounded-lg p-5 flex flex-col items-center justify-center text-center h-80 w-full max-w-xs mx-auto">
       {icon}
-      <div className={subtitle({ size: "md", class: "mt-4 font-semibold text-darkBlue" })}>{name}</div>
-      <p className={subtitle({ size: "sm", class: "text-gray-500" })}>{description}</p>
+      <div className={subtitle({ size: "md", class: "mt-4 font-semibold text-darkBlue leading-tight lg:leading-snug" })}>{name}</div>
+      <p className={subtitle({ size: "sm", class: "text-gray-500 leading-tight lg:leading-snug" })}>{description}</p>
       <div className="flex gap-3 justify-center mt-4">
         <Link
           isExternal
@@ -57,7 +57,7 @@ const features = [
 export default function ProjectPage() {
   return (
     <div className="min-h-screen w-full bg-lightWhite flex flex-col items-center pt-8 pb-10">
-      <div className={title({ size: "sm", class: "font-semibold text-center text-darkBlue mb-8" })}>
+      <div className={title({ size: "sm", class: "font-semibold text-center text-darkBlue mb-8 leading-tight lg:leading-snug" })}>
         Agentic Document Extraction
       </div>
       <div className="w-full max-w-5xl grid grid-cols-1 sm:grid-cols-2 gap-4 pt-5">

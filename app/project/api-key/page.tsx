@@ -3,8 +3,8 @@
 import { subtitle } from "@/components/primitives";
 import { Input, Select, SelectItem } from "@heroui/react";
 import { KeyRound } from "lucide-react";
-import ModalComponent from "@/components/modal";
-import TableAPI from "@/components/project.components/table-api";
+import ModalComponent from "@/components/commons/modal";
+import { TableAPI } from "@/components/project.components/table-project";
 
 const projects = [
     { key: "project1", label: "Project 1" },
@@ -38,7 +38,7 @@ export default function APIKeyPage() {
                             <div>
                                 <div className="flex flex-row gap-1 items-center">
                                     <KeyRound size={35} className="font-semibold" /> 
-                                    <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue" })}>
+                                    <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue leading-tight lg:leading-snug" })}>
                                         API Keys
                                     </div>
                                 </div>

@@ -1,4 +1,4 @@
-import { SideNavBar } from "@/components/navbar";
+import { SideNavBar } from "@/components/commons/navbar";
 
 export default function ProjectLayout({
   children,

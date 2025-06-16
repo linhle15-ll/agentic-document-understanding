@@ -2,10 +2,9 @@
 'use client';
 import { subtitle } from "@/components/primitives";
 import { Pen, Settings } from "lucide-react";
-import { Input, Snippet } from "@heroui/react";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import TableExtraction from "@/components/project.components/table-extraction";
-import ModalComponent from "@/components/modal";
+import { Input, Snippet, Link } from "@heroui/react";
+import { TableExtraction } from "@/components/project.components/table-project";
+import ModalComponent from "@/components/commons/modal";
 
 export default function SettingsPage(this: any) {
     return (
@@ -14,11 +13,10 @@ export default function SettingsPage(this: any) {
                 <div className="w-full mx-auto">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-center border-b py-5">
                         <div className="flex items-center gap-3">
-
                             <div>
                                 <div className="flex flex-row gap-1 items-center">
                                     <Settings size={35} className="font-semibold" /> 
-                                    <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue" })}>
+                                    <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue leading-tight lg:leading-snug" })}>
                                         Settings
                                     </div>
                                 </div>
@@ -32,13 +30,11 @@ export default function SettingsPage(this: any) {
                 </div>
 
                 {/* Main */}
+                <div className="flex flex-col gap-5"> 
                 <div className="flex flex-col gap-2 w-full mx-auto bg-white border border-gray-200 rounded-lg p-4">
-                    <div className="flex flex-row justify-between items-center p-1 bg-gray-20 s">
-                        
-
-                    </div>
+                    {/* Switch Organization, Members, Billing */}
                     <div className="flex flex-row justify-around">
-                        <div className={subtitle({size:"lg", class:"text-gray-900 font-semibold"})}> Organization Information </div>
+                        <div className={subtitle({size:"lg", class:"text-gray-900 font-semibold leading-tight lg:leading-snug"})}> Organization Information </div>
                         <div className="flex flex-row gap-2 mt-4 md:mt-0">
                             <ModalComponent 
                                 modalTitle={
@@ -64,26 +60,24 @@ export default function SettingsPage(this: any) {
                         </div>
                     </div>
 
-                    <div className="flex flex-row">
-                        <div className="flex flex-col gap-1">
+                    <div className="flex flex-row gap-32 w-full items-start">
+                        <div className="flex flex-col gap-1 align-middle justify-between">
                             Organization ID
                             <Snippet>copy Organization ID</Snippet>
                         </div>
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-2">
                             Organization Name
                             <Snippet> User Org</Snippet>
-                            <CopyToClipboard text={this.state.value}
-                                onCopy={() => this.setState({copied: true})}>
-                                <span>Copy to clipboard with span</span>
-                            </CopyToClipboard>
+                           
                         </div>
                     </div>
                 </div>
 
                 <div className="flex flex-col gap-2 w-full mx-auto bg-white border border-gray-200 rounded-lg p-4">
-                    <div className={subtitle({size:"lg", class:"text-gray-900 font-semibold"})}> Projects </div>
+                    <div className={subtitle({size:"lg", class:"text-gray-900 font-semibold leading-tight lg:leading-snug"})}> Projects </div>
                     <TableExtraction />
                 </div>
+            </div>
             </div>
         </div>
     );

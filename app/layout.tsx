@@ -33,24 +33,21 @@ export default function RootLayout({
       <head />
       <body
         className={clsx(
-          "min-h-screen overflow-x-hidden font-sans antialiase bg-lightWhite",
+          "min-h-screen overflow-x-hidden font-sans antialiase bg-lightWhite flex flex-col",
           fontSans.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className="relative flex flex-col h-screen">
-            <div className="absolute inset-0 -z-10 h-full w-full bg-lightWhite">
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-background to-transparent opacity-30"></div>
+            <div className="flex flex-row">
+              <main className="w-full flex-grow bg-lightWhite">
+                {children}
+              </main>
             </div>
-            <main className="container mx-auto flex-grow bg-lightWhite">
-              {children}
-            </main>
-            <footer className="w-full flex items-center justify-center py-6 border-t border-gray-200">
+            <footer className="w-full flex items-center justify-center text-center py-6 px-5 border-t border-gray-200">
               <p className="text-sm text-gray-600">
                 © {new Date().getFullYear()} Agentic Document Understanding. All rights reserved.
               </p>
             </footer>
-          </div>
         </Providers>
       </body>
     </html>

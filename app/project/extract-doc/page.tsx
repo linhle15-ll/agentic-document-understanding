@@ -6,7 +6,7 @@ import SplitPane, { Pane } from 'split-pane-react';
 import { button as buttonStyles, Button, Link } from "@heroui/react";
 import { Code, MoveUpRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
-import ModalComponent from "@/components/modal";
+import ModalComponent from "@/components/commons/modal";
 import invoice from '@/public/use-cases/invoice-doc.webp';
 import labReport from '@/public/use-cases/lab-report-doc.webp';
 import performanceChart from '@/public/use-cases/performance-doc.jpg';
@@ -15,6 +15,7 @@ import { CardProps } from "@/types/index";
 import Upload from "@/components/project.components/upload";
 import AgentConfigPanel from "@/components/project.components/agent-config-panel";
 import 'split-pane-react/esm/themes/default.css';
+import { TableExtraction } from "@/components/project.components/table-project";
 
 const exampleFiles = [
   {
@@ -57,7 +58,7 @@ function Card({ name, descriptionArr, illustration }: CardProps) {
         <div className="flex items-center justify-center w-full flex-1">
           {illustration && (
             <Image
-              src={typeof illustration === 'string' ? illustration : illustration.src}
+              src={illustration}
               alt={name}
               className="object-contain rounded-md bg-white border border-gray-200"
               width={140}
@@ -85,7 +86,6 @@ function getExtensionFromMime(mime: string) {
 export default function ExtractDocMainPage() {
   const [isSchema, setIsSchema] = React.useState(false);
   const [exampleFile, setExampleFile] = React.useState<File | null>(null);
-  const [sizes, setSizes] = React.useState([380, 'auto']);
 
   async function handleExampleFileSelect(illustration: any, name: string) {
     const url = typeof illustration === 'string' ? illustration : illustration.src;
@@ -114,18 +114,28 @@ export default function ExtractDocMainPage() {
     </div>
   );
 
+  // Sizeable Splitpane
+  const [sizes, setSizes] = React.useState([100, '30%', 'auto']);
+
+  const layoutCSS = {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  };
+
   return (
     <div className="flex flex-col items-center w-full min-h-screen pb-10 px-2 sm:px-4 md:px-8 lg:px-11">
-      <div className="flex flex-col gap-2 w-full mx-auto flex-1 min-h-0">
+      <div className="flex flex-col gap-2 w-full mx-auto flex-1">
         {/* Header */}
         <div className="flex flex-col w-full mx-auto md:flex-row md:justify-between md:items-center border-b py-5">
           <div className="flex items-center">
             <div>
-              <div className={subtitle({ size: "sm", class: "font-regular" })}>
+              <div className={subtitle({ size: "sm", class: "font-regular leading-tight lg:leading-snug" })}>
                 <Link href="/project/extract-doc/agent" className="hover:cursor-pointer">Extraction</Link> &gt; <Link href="/project/extract-doc" className="hover:cursor-pointer">Extraction</Link>
               </div>
               <div className="flex flex-row gap-1 items-center">
-                <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue" })}>
+                <div className={subtitle({ size: "lg", class: "font-semibold text-darkBlue leading-tight lg:leading-snug" })}>
                   Project Name
                 </div>
               </div>
@@ -145,54 +155,48 @@ export default function ExtractDocMainPage() {
         </div>
 
         {/* Main */}
-        <div className="flex-1 min-h-0">
-          <SplitPane
-            split="vertical"
-            sizes={sizes}
-            onChange={setSizes}
-            className="w-full h-full"
-            sashRender={() => <div style={{ background: '#e5e7eb', width: '4px', height: '100%' }} />}
-          >
+      <div className="flex-1 min-h-0 flex flex-col gap-4">
+                    {/* Switch Schema and Extraction Result */}
+              <div className="flex gap-1 bg-gray-100 rounded-lg p-1 w-fit mb-2">
+                <button
+                  onClick={() => setIsSchema(true)}
+                  className={`px-4 py-2 rounded-lg font-semibold transition ${isSchema
+                      ? "bg-white text-gray-900 shadow"
+                      : "bg-transparent text-gray-400"
+                    }`}
+                >
+                  Schema
+                </button>
+                <button
+                  onClick={() => setIsSchema(false)}
+                  className={`px-4 py-2 rounded-md font-semibold transition ${!isSchema
+                      ? "bg-white text-gray-900 shadow"
+                      : "bg-transparent text-gray-400"
+                    }`}
+                >
+                  Extraction Results
+                </button>
+              </div>
+        {isSchema ? (
+          <div className="flex flex-col lg:flex-row">
             {/* Left Panel: AgentConfigPanel */}
-            <Pane minSize={280} maxSize={600}>
-              <div className="h-full flex-shrink-0">
-                <AgentConfigPanel />
-              </div>
-            </Pane>
+            <div className="h-full flex-shrink-0 w-full lg:w-[600px]">
+              <AgentConfigPanel />
+            </div>
             {/* Right Panel: Main Content */}
-            <Pane>
-              <div className="flex-1 flex flex-col justify-center px-4">
-                {/* Switch Schema and Extraction Result */}
-                <div className="flex gap-1 bg-gray-100 rounded-lg p-1 w-fit mb-2">
-                  <button
-                    onClick={() => setIsSchema(true)}
-                    className={`px-4 py-2 rounded-lg font-semibold transition ${isSchema
-                        ? "bg-white text-gray-900 shadow"
-                        : "bg-transparent text-gray-400"
-                      }`}
-                  >
-                    Schema
-                  </button>
-                  <button
-                    onClick={() => setIsSchema(false)}
-                    className={`px-4 py-2 rounded-md font-semibold transition ${!isSchema
-                        ? "bg-white text-gray-900 shadow"
-                        : "bg-transparent text-gray-400"
-                      }`}
-                  >
-                    Extraction Results
-                  </button>
-                </div>
-                <Upload passedFile={exampleFile} onFileChange={setExampleFile} />
+            <div className="flex-1 flex flex-col justify-center px-4">
+              <Upload passedFile={exampleFile} onFileChange={setExampleFile} />
 
-                <div className="relative flex justify-between mt-8 text-md font-semibold px-2 w-full">
-                  <ModalComponent modelTitle="Example files" modalContent={ExampleFiles} buttonName="Example files" buttonVariant="bordered" buttonColor="primary" buttonAction="OK" />
-                  <Button variant="solid" radius="md" color="primary"> Run Extraction</Button>
-                </div>
+              <div className="relative flex justify-between mt-8 text-md font-semibold px-2 w-full">
+                <ModalComponent modelTitle="Example files" modalContent={ExampleFiles} buttonName="Example files" buttonVariant="bordered" buttonColor="primary" buttonAction="OK" />
+                <Button variant="solid" radius="md" color="primary"> Run Extraction</Button>
               </div>
-            </Pane>
-          </SplitPane>
-        </div>
+            </div>
+          </div>
+        ) : (
+          <TableExtraction />
+        )}
+      </div>
       </div>
     </div>
   );

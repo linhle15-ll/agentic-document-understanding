@@ -6,9 +6,9 @@ export default function ActionCall() {
   return (
     <section className="w-full py-16 px-4 flex flex-col items-center">
       <div className="w-full max-w-3xl flex flex-col items-center text-center">
-        <h2 className={title({ class: "text-darkBlue mb-4", size: "lg" })}>
+        <div className={title({ class: "text-darkBlue mb-4 leading-tight lg:leading-snug", size: "lg" })}>
           Ready to Transform Your Document Workflow?
-        </h2>
+        </div>
         <div className={subtitle({ class: "mb-8" })}>
           Start extracting, enriching, and understanding your documents with agentic intelligence. Get started in minutes—no credit card required.
         </div>

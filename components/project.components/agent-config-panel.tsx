@@ -61,18 +61,18 @@ export default function AgentConfigPanel() {
         )
     }
     return (
-        <div className="flex flex-col w-full max-w-lg h-[calc(100vh-2rem)] border-gray-200 border rounded-lg p-3 bg-white">
-            <div className={subtitle({ size: "md", class: "font-semibold" })}>
+        <div className="flex flex-col w-full h-[calc(100vh-2rem)] border-gray-200 border rounded-lg p-3 bg-white">
+            <div className={subtitle({ size: "md", class: "font-semibold leading-tight lg:leading-snug" })}>
                 Agent Configuration
             </div>
-            <div className="flex flex-col w-full max-w-lg h-full pb-4 bg-white overflow-y-auto">
+            <div className="flex flex-col w-full h-full pb-4 bg-white overflow-y-auto">
                 {/* Basic */}
                 <div className="relative border-b w-full">
                     <button
                         className="flex items-center justify-between w-full px-4 py-3 font-semibold"
                         onClick={() => setIsPriceSectionOpen((v) => !v)}
                     >
-                        <div className={subtitle({ size: "sm", class: "text-gray-900 text-left" })}>Basic</div>
+                        <div className={subtitle({ size: "sm", class: "text-gray-900 text-left leading-tight lg:leading-snug" })}>Basic</div>
                         {isPriceSectionOpen ? <ChevronDown /> : <ChevronUp />}
                     </button>
                     {isPriceSectionOpen && (
@@ -108,7 +108,7 @@ export default function AgentConfigPanel() {
                         className="flex justify-between w-full px-4 py-3 font-semibold"
                         onClick={() => setIsExtractionSettingOpen((v) => !v)}
                     >
-                        <div className={subtitle({ size: "sm", class: "text-gray-900 text-left" })}>Advanced</div>
+                        <div className={subtitle({ size: "sm", class: "text-gray-900 text-left leading-tight lg:leading-snug" })}>Advanced</div>
                         {isExtractionSettingOpen ? <ChevronDown /> : <ChevronUp />}
                     </button>
                     {isExtractionSettingOpen && (
@@ -245,7 +245,7 @@ export default function AgentConfigPanel() {
                         className="flex justify-between w-full px-4 py-3 font-semibold"
                         onClick={() => setIsSchemaSetUp((v) => !v)}
                     >
-                        <div className={subtitle({ size: "sm", class: "text-gray-900 text-left" })}>Schema</div>
+                        <div className={subtitle({ size: "sm", class: "text-gray-900 text-left leading-tight lg:leading-snug" })}>Schema</div>
                         {isSchemaSetUp ? <ChevronDown /> : <ChevronUp />}
                     </button>
                     {isSchemaSetUp && (
@@ -291,7 +291,7 @@ export default function AgentConfigPanel() {
                             <div className="mt-4">
                             {isSetSchemaField === false ? (
                                 <div className="flex flex-col gap-2 justify-center items-center align-middle">
-                                <div className={subtitle({ size: "sm", class: "text-gray-900 text-center font-semibold" })}> Create Schema </div>
+                                <div className={subtitle({ size: "sm", class: "text-gray-900 text-center font-semibold leading-tight lg:leading-snug" })}> Create Schema </div>
                                 <div className="text-gray-500 text-center">
                                     Add the fields to extract from the document.
                                     Schema Builder supports only a subset of
@@ -312,19 +312,19 @@ export default function AgentConfigPanel() {
                                                     placeholder="Field name"
                                                     value={field.name}
                                                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFieldChange(idx, "name", e.target.value)}
-                                                    className="max-w-sm"
+                                                    className="min-w-0"
                                                 />
                                                 <Select
                                                     selectedKeys={[field.type]}
                                                     onChange={e => handleFieldChange(idx, "type", e.target.value)}
-                                                    className="max-w-sm"
+                                                    className="min-w-0"
                                                 >
                                                     <SelectItem key="string">String</SelectItem>
                                                     <SelectItem key="number">Number</SelectItem>
                                                     <SelectItem key="boolean">Boolean</SelectItem>
                                                 </Select>
                                                 <Input
-                                                    className="max-w-sm"
+                                                    className="min-w-0"
                                                     placeholder="Field description"
                                                     isRequired
                                                     value={field.description}
