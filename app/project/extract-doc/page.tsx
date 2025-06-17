@@ -210,7 +210,7 @@ export default function ExtractDocMainPage() {
                 <AgentConfigPanel />
               </div>
               {/* Right Panel: Main Content */}
-              <div className="flex-1 flex flex-col justify-center px-4">
+              <div className="flex-1 flex flex-col sm:mt-4 md:mt-4 justify-center px-4">
                 <Upload
                   passedFile={exampleFile}
                   onFileChange={setExampleFile}

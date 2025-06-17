@@ -177,7 +177,7 @@ export default function ParseDocPage() {
           <div className="w-full lg:w-[380px] xl:w-[420px] flex-shrink-0">
             <ParseOptionPanel />
           </div>
-          <div className="flex-1 flex flex-col justify-center">
+          <div className="flex-1 flex flex-col sm:mt-4 md:mt-4 justify-center">
             <Upload passedFile={exampleFile} onFileChange={setExampleFile} />
 
             <div className="relative flex flex-col gap-3 min-w-screen mt-8 text-md font-semibold justify-center text-center px-2 w-full">

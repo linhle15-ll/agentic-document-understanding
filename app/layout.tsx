@@ -40,7 +40,7 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
-          <div className="flex flex-row">
+          <div className="flex flex-row gap-4">
             <main className="w-full flex-grow bg-lightWhite">{children}</main>
           </div>
           <footer className="w-full flex items-center justify-center text-center py-6 px-5 border-t border-gray-200">

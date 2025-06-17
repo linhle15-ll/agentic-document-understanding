@@ -27,8 +27,7 @@ export default function Home() {
                 size: "lg",
               })}
             >
-              {" "}
-              Intelligent Document Understanding{" "}
+              Intelligent Document Understanding
             </div>
             <div
               className={subtitle({

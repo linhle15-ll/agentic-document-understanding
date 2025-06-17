@@ -229,7 +229,7 @@ export const SideNavBar = () => {
       {!open && (
         <button
           aria-label="Open sidebar"
-          className="lg:hidden fixed top-4 right-4 z-50 rounded-full p-2 shadow"
+          className="fixed top-4 right-4 z-50 rounded-full p-2 shadow"
           style={{ all: "unset", cursor: "pointer" }}
           tabIndex={0}
           type="button"

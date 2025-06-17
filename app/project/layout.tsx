@@ -6,7 +6,7 @@ export default function ProjectLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section className="flex flex-row gap-4 items-start">
+    <section className="flex flex-row items-start">
       <SideNavBar />
       <div className="bg-lightWhite w-full">{children}</div>
     </section>

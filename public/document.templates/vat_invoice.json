@@ -1,0 +1,179 @@
+{
+  "description": "Key Information Extraction of VInvoice, each extracted value comes with a list of citations - the list of exact original raw content used to produce itself, and a confidence score.",
+  "properties": {
+    "facility": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Facility Name - Tên đơn vị bán hàng, cơ sở phát hành hóa đơn",
+      "title": "Facility"
+    },
+    "facility_tax_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Tax Code - Mã số thuế của cơ sở khám chữa bệnh, cung cấp dịch vụ",
+      "title": "Facility Tax Code"
+    },
+    "facility_address": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Facility Address - Địa chỉ của đơn vị bán hàng",
+      "title": "Facility Address"
+    },
+    "name": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Patient's Full Name - Họ tên Bên mua (Khách hàng/Bệnh nhân/Người dùng dịch vụ)",
+      "title": "Name"
+    },
+    "address": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Patient's Address - Địa chỉ của bệnh nhân",
+      "title": "Address"
+    },
+    "payment_method": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Payment Method - Phương thức thanh toán",
+      "title": "Payment Method"
+    },
+    "payment_category": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Payment Category - Hạng mục chi trả/Tên hàng hóa dịch vụ",
+      "title": "Payment Category"
+    },
+    "total_amount": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Total Amount - Tổng tiền/ Tổng chi phí khám chữa bệnh/ Tổng giá trị hóa đơn",
+      "title": "Total Amount"
+    },
+    "transaction_time": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Transaction Time - Thời điểm giao dịch",
+      "title": "Transaction Time"
+    },
+    "invoice_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Invoice Number - Số hóa đơn",
+      "title": "Invoice Number"
+    },
+    "serial_number": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Serial Number - Ký hiệu (Serial) của hóa đơn",
+      "title": "Serial Number"
+    },
+    "invoice_link": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Invoice Link - Link/website tra cứu hóa đơn",
+      "title": "Invoice Link"
+    },
+    "lookup_code": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "Lookup Code - Mã tra cứu, mã nhận hóa đơn, mã số bí mật của hóa đơn",
+      "title": "Lookup Code"
+    }
+  },
+  "required": [
+    "facility",
+    "facility_tax_code",
+    "facility_address",
+    "name",
+    "address",
+    "payment_method",
+    "payment_category",
+    "total_amount",
+    "transaction_time",
+    "invoice_number",
+    "serial_number",
+    "invoice_link",
+    "lookup_code"
+  ],
+  "title": "VInvoice",
+  "type": "object"
+}

@@ -1,4 +1,5 @@
-import { useState } from "react";
+'use client'
+import React from "react";
 import {
   Input,
   Switch,
@@ -19,61 +20,33 @@ import {
   Plus,
   X,
 } from "lucide-react";
-
 import { subtitle } from "../primitives";
-
 import PriceDropdown from "@/components/project.components/price-drop-down-input";
+import invoiceTemplate from "@/public/document.templates/vat_invoice.json";
+import Tooltip from "../commons/tooltip";
 
 const DocumentTypes = [
   { key: "custom", label: "Custom" },
   { key: "technical resume", label: "Technical Resume" },
-  { key: "invoice", label: "Invoice" },
   { key: "research paper", label: "Research Paper" },
-  { key: "10 K/Q Filling", label: "10 K/Q Filling" },
+  { key: "vat invoice", label: "VAT Invoice" },
 ];
 
-// Styled Tooltip component
-function Tooltip({
-  content,
-  children,
-}: {
-  content: React.ReactNode;
-  children: React.ReactNode;
-}) {
-  const [show, setShow] = useState(false);
-
-  return (
-    <span
-      className="relative inline-block align-middle"
-      onMouseEnter={() => setShow(true)}
-      onMouseLeave={() => setShow(false)}
-    >
-      {children}
-      {show && (
-        <div className="absolute left-1/2 z-50 -translate-x-1/2 mt-2 w-72 bg-gray-900 text-white text-xs rounded p-3 shadow-lg">
-          {content}
-        </div>
-      )}
-    </span>
-  );
-}
-
 export default function AgentConfigPanel() {
-  const [isPriceSectionOpen, setIsPriceSectionOpen] = useState<boolean>(true);
-  const [isExtractionSettingOpen, setIsExtractionSettingOpen] =
-    useState<boolean>(true);
-  const [extractionTarget, setExtractionTarget] = useState<string>("page");
-  const [useReasoning, setUseReasoning] = useState<boolean>(false);
-  const [citeSources, setCiteSources] = useState<boolean>(false);
-  const [chunkMode, setChunkMode] = useState<string>("page");
-  const [noCache, setNoCache] = useState(false);
-  const [documentType, setDocumentType] = useState<string>("custom");
-  const [isSchemaSetUp, setIsSchemaSetUp] = useState<boolean>(false);
-  const [isSetSchemaField, setIsSetSchemaField] = useState<boolean>(false);
-  const [isField, setIsField] = useState<boolean>(true);
+  const [isPriceSectionOpen, setIsPriceSectionOpen] = React.useState<boolean>(true);
+  const [isExtractionSettingOpen, setIsExtractionSettingOpen] = React.useState<boolean>(true);
+  const [extractionTarget, setExtractionTarget] = React.useState<string>("page");
+  const [useReasoning, setUseReasoning] = React.useState<boolean>(false);
+  const [citeSources, setCiteSources] = React.useState<boolean>(false);
+  const [chunkMode, setChunkMode] = React.useState<string>("page");
+  const [noCache, setNoCache] = React.useState(false);
+  const [documentType, setDocumentType] = React.useState<string>("custom");
+  const [isSchemaSetUp, setIsSchemaSetUp] = React.useState<boolean>(false);
+  const [isSetSchemaField, setIsSetSchemaField] = React.useState<boolean>(false);
+  const [isField, setIsField] = React.useState<boolean>(true);
+  const [fields, setFields] = React.useState<Field[]>([]);
 
   type Field = { name: string; type: string; description: string };
-  const [fields, setFields] = useState<Field[]>([]);
 
   const handleAddField = () => {
     setFields([...fields, { name: "", type: "string", description: "" }]);
@@ -88,8 +61,29 @@ export default function AgentConfigPanel() {
     );
   };
 
+  // Convert VAT Invocie JSON to fields[]
+  const parseVatInvoiceFields = () => {
+    const invoiceProps: Record<string, any> = invoiceTemplate.properties || {};
+
+    return Object.keys(invoiceProps).map((key) => ({
+      name: invoiceProps[key].title || key,
+      type: Array.isArray(invoiceProps[key].anyOf) && invoiceProps[key].anyOf[0]?.type
+        ? invoiceProps[key].anyOf[0].type
+        : invoiceProps[key].type || "string",
+      description: invoiceProps[key].description || "",
+    }));
+  }
+
+  React.useEffect(() => {
+    if (documentType === "vat invoice") {
+      setFields(parseVatInvoiceFields());
+    } else if (documentType === "custom") {
+      setFields([]);
+    }
+  }, [documentType]);
+
   return (
-    <div className="flex flex-col w-full h-[calc(100vh-2rem)] border-gray-200 border rounded-lg p-3 bg-white">
+    <div className="flex flex-col w-full h-screen border-gray-200 border rounded-lg p-3 bg-white">
       <div
         className={subtitle({
           size: "md",
@@ -398,21 +392,19 @@ export default function AgentConfigPanel() {
                 {/* Switch Schema and Code */}
                 <div className="flex gap-1 bg-gray-100 rounded-lg p-1 w-fit h-full items-baseline align-bottom">
                   <button
-                    className={`px-4 py-2 rounded-lg font-semibold transition ${
-                      isField
+                    className={`px-4 py-2 rounded-lg font-semibold transition ${isField
                         ? "bg-white text-gray-900 shadow"
                         : "bg-transparent text-gray-400"
-                    }`}
+                      }`}
                     onClick={() => setIsField(true)}
                   >
                     <Table />
                   </button>
                   <button
-                    className={`px-4 py-2 rounded-md font-semibold transition ${
-                      !isField
+                    className={`px-4 py-2 rounded-md font-semibold transition ${!isField
                         ? "bg-white text-gray-900 shadow"
                         : "bg-transparent text-gray-400"
-                    }`}
+                      }`}
                     onClick={() => setIsField(false)}
                   >
                     <Code />
@@ -420,40 +412,95 @@ export default function AgentConfigPanel() {
                 </div>
               </div>
               {/* Create Schema */}
-              <div className="mt-4">
+              <div className="flex flex-col mt-4 items-left">
                 {isSetSchemaField === false ? (
-                  <div className="flex flex-col gap-2 justify-center items-center align-middle">
-                    <div
-                      className={subtitle({
-                        size: "sm",
-                        class:
-                          "text-gray-900 text-center font-semibold leading-tight lg:leading-snug",
-                      })}
-                    >
-                      {" "}
-                      Create Schema{" "}
+                  documentType === "custom" ? (
+                    <div className="flex flex-col gap-2 justify-center items-center align-middle">
+                      <div
+                        className={subtitle({
+                          size: "sm",
+                          class:
+                            "text-gray-900 text-center font-semibold leading-tight lg:leading-snug",
+                        })}
+                      >
+                        Create Schema
+                      </div>
+                      <div className="text-gray-500 text-center">
+                        Add the fields to extract from the document. Schema
+                        Builder supports only a subset of JSON schema — use the
+                        Raw Editor if needed.
+                      </div>
+                      <Button
+                        color="primary"
+                        radius="full"
+                        variant="solid"
+                        onClick={handleAddField}
+                      >
+                        <Plus className="text-white font-semibold" size={16} />{" "}
+                        Add Field
+                      </Button>
                     </div>
-                    <div className="text-gray-500 text-center">
-                      Add the fields to extract from the document. Schema
-                      Builder supports only a subset of JSON schema — use the
-                      Raw Editor if needed.
+                  ) : (
+                    <div className="flex flex-col gap-4">
+                      {/* ...schema header and controls... */}
+                      <div className="flex flex-col gap-2">
+                        {fields.map((field, idx) => (
+                          <div key={idx} className="flex gap-2 items-center">
+                            <Input
+                              className="min-w-0"
+                              placeholder="Field name"
+                              value={field.name}
+                              onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>,
+                              ) => handleFieldChange(idx, "name", e.target.value)}
+                            />
+                            <Select
+                              className="min-w-0"
+                              selectedKeys={[field.type]}
+                              onChange={(e) =>
+                                handleFieldChange(idx, "type", e.target.value)
+                              }
+                            >
+                              <SelectItem key="string">String</SelectItem>
+                              <SelectItem key="number">Number</SelectItem>
+                              <SelectItem key="boolean">Boolean</SelectItem>
+                            </Select>
+                            <Input
+                              isRequired
+                              className="min-w-0"
+                              placeholder="Field description"
+                              value={field.description}
+                              onChange={(e) =>
+                                handleFieldChange(
+                                  idx,
+                                  "description",
+                                  e.target.value,
+                                )
+                              }
+                            />
+                            <X className="font-semibold text-red-600" size={16} />
+                          </div>
+                        ))}
+                        <Button
+                          className="mt-2 w-fit"
+                          color="primary"
+                          radius="full"
+                          variant="solid"
+                          onClick={handleAddField}
+                        >
+                          <Plus className="text-white font-semibold" size={16} />{" "}
+                          Add Field
+                        </Button>
+                      </div>
                     </div>
-                    <Button
-                      color="primary"
-                      radius="full"
-                      variant="solid"
-                      onClick={handleAddField}
-                    >
-                      <Plus className="text-white font-semibold" size={16} />{" "}
-                      Add Field
-                    </Button>
-                  </div>
+                  )
                 ) : (
                   <div className="flex flex-col gap-4">
                     {/* ...schema header and controls... */}
                     <div className="flex flex-col gap-2">
                       {fields.map((field, idx) => (
                         <div key={idx} className="flex gap-2 items-center">
+                          {/* {field.name} */}
                           <Input
                             className="min-w-0"
                             placeholder="Field name"
@@ -462,6 +509,7 @@ export default function AgentConfigPanel() {
                               e: React.ChangeEvent<HTMLInputElement>,
                             ) => handleFieldChange(idx, "name", e.target.value)}
                           />
+                          {/* {field.type} */}
                           <Select
                             className="min-w-0"
                             selectedKeys={[field.type]}
@@ -473,6 +521,7 @@ export default function AgentConfigPanel() {
                             <SelectItem key="number">Number</SelectItem>
                             <SelectItem key="boolean">Boolean</SelectItem>
                           </Select>
+                          {/* {field.description} */}
                           <Input
                             isRequired
                             className="min-w-0"

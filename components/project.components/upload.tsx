@@ -33,16 +33,18 @@ export default function Upload({
 
   return (
     <div className="bg-background p-6 rounded-lg shadow-lg w-full border border-gray-20">
-      <div className="space-y-6">
+      <div className="space-y-6 flex flex-col w-full">
         <div>
-          <h3 className="text-2xl font-bold bg-clip-text text-darkBlue">
+          <div className="text-2xl font-bold bg-clip-text text-darkBlue">
             Upload File
-          </h3>
-          <p className="text-muted-foreground mt-2">
+          </div>
+          <div className="text-muted-foreground mt-2">
             Drag and drop your file or click to select.
-          </p>
+          </div>
         </div>
-        <button
+        
+        <div
+          role="button"
           aria-label="Upload file"
           className={`border-2 border-dashed rounded-lg p-8 flex flex-col items-center justify-center space-y-4 cursor-pointer transition-all duration-300 ${
             file
@@ -51,6 +53,13 @@ export default function Upload({
           }`}
           tabIndex={0}
           onClick={handleAreaClick}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleAreaClick();
+           }
+          }}
+          
           onDragLeave={(e) => {
             e.preventDefault();
             if (!file) {
@@ -103,7 +112,7 @@ export default function Upload({
             type="file"
             onChange={handleFileChange}
           />
-        </button>
+        </div>
         {file && (
           <div className="flex justify-end">
             <button
