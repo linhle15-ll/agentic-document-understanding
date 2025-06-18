@@ -80,7 +80,7 @@ const features = [
 
 export default function ProjectPage() {
   return (
-    <div className="min-h-screen w-full bg-lightWhite flex flex-col items-center pt-8 pb-10">
+    <div className="h-screen w-full bg-lightWhite flex flex-col items-center pt-8 pb-10">
       <div
         className={title({
           size: "sm",

@@ -92,7 +92,7 @@ export default function AgentConfigPanel() {
       >
         Agent Configuration
       </div>
-      <div className="flex flex-col w-full h-full pb-4 bg-white overflow-y-auto">
+      <div className="flex flex-col w-full pb-4 bg-white overflow-y-auto">
         {/* Basic */}
         <div className="relative border-b w-full">
           <button
@@ -478,7 +478,7 @@ export default function AgentConfigPanel() {
                                 )
                               }
                             />
-                            <X className="font-semibold text-red-600" size={16} />
+                            <X className="font-bold text-red-600" size={40} />
                           </div>
                         ))}
                         <Button
@@ -488,7 +488,7 @@ export default function AgentConfigPanel() {
                           variant="solid"
                           onClick={handleAddField}
                         >
-                          <Plus className="text-white font-semibold" size={16} />{" "}
+                          <Plus className="text-white font-semibold" size={30} />{" "}
                           Add Field
                         </Button>
                       </div>
@@ -535,7 +535,7 @@ export default function AgentConfigPanel() {
                               )
                             }
                           />
-                          <X className="font-semibold text-red-600" size={16} />
+                          <X className="font-bold text-red-600" size={50} />
                         </div>
                       ))}
                       <Button
@@ -545,7 +545,7 @@ export default function AgentConfigPanel() {
                         variant="solid"
                         onClick={handleAddField}
                       >
-                        <Plus className="text-white font-semibold" size={16} />{" "}
+                        <Plus className="text-white font-bold" size={50} />{" "}
                         Add Field
                       </Button>
                     </div>

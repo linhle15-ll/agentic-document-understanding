@@ -16,10 +16,7 @@ import {
 } from "@heroui/react";
 import NextLink from "next/link";
 import Image from "next/image";
-import {
-  X,
-  Menu,
-} from "lucide-react";
+import { X } from "lucide-react";
 import { sideNavSections } from "@/config/site";
 import clsx from "clsx";
 
@@ -124,23 +121,14 @@ export const MainNavbar = () => {
 
 // --- Responsive SideNavBar ---
 
-export const SideNavBar = () => {
-  const [open, setOpen] = React.useState(false);
-  const [settingsOpen, setSettingsOpen] = React.useState(false);
+type SideNavBarProps = {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+};
 
+export const SideNavBar = ({ open, setOpen }: SideNavBarProps) => {
   return (
-    <div className="relative flex flex-col h-screen">
-      {/* Hamburger button for small/medium screens */}
-      {!open && (
-        <button
-          aria-label="Open sidebar"
-          className="fixed top-4 right-4 z-50 block lg:hidden p-2 rounded-full bg-white shadow"
-          type="button"
-          onClick={() => setOpen(true)}
-        >
-          <Menu className="w-6 h-6" />
-        </button>
-      )}
+    <div className="fixed h-[100%] flex flex-col">
 
       {/* Overlay for mobile when sidebar is open */}
       {open && (
@@ -157,7 +145,8 @@ export const SideNavBar = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed h-screen w-64 bg-white border-r z-50 transform transition-transform
+          fixed top-0 left-0 h-[100%] w-64 bg-white border-r z-50 
+          transform transition-transform
           ${open ? "translate-x-0" : "-translate-x-full"}
           lg:translate-x-0 lg:static lg:block
           flex flex-col px-4 py-6
