@@ -129,7 +129,7 @@ export const SideNavBar = () => {
   const [settingsOpen, setSettingsOpen] = React.useState(false);
 
   return (
-        <>
+    <div className="relative flex flex-col h-screen">
       {/* Hamburger button for small/medium screens */}
       {!open && (
         <button
@@ -199,7 +199,7 @@ export const SideNavBar = () => {
           ))}
         </nav>
       </aside>
-    </>
+    </div>
   );
 };
 
