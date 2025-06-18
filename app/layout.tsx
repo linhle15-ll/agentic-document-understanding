@@ -44,7 +44,7 @@ export default function RootLayout({
             <main className="w-full flex-grow bg-lightWhite">{children}</main>
           </div>
           <footer className="w-full flex items-center justify-center text-center py-6 px-5 border-t border-gray-200">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-center text-gray-600">
               © {new Date().getFullYear()} Agentic Document Understanding. All
               rights reserved.
             </p>

@@ -17,22 +17,10 @@ import {
 import NextLink from "next/link";
 import Image from "next/image";
 import {
-  Home,
-  BookCheck,
-  Notebook,
-  Settings,
-  KeyRound,
-  FileCode,
-  Mail,
-  BarChart2,
-  Layers,
+  X,
   Menu,
-  Building,
-  CircleDollarSign,
-  Users,
-  ChevronDown,
-  ChevronUp,
 } from "lucide-react";
+import { sideNavSections } from "@/config/site";
 import clsx from "clsx";
 
 import { siteConfig } from "@/config/site";
@@ -136,102 +124,17 @@ export const MainNavbar = () => {
 
 // --- Responsive SideNavBar ---
 
-const sideNavSections = [
-  {
-    title: "Overview",
-    items: [
-      {
-        label: "Home",
-        href: "/project/",
-        icon: Home,
-      },
-    ],
-  },
-  {
-    title: "Tools",
-    items: [
-      {
-        label: "Parse",
-        href: "/project/parse-doc",
-        icon: BookCheck,
-      },
-      {
-        label: "Extraction",
-        href: "/project/extract-doc",
-        icon: Notebook,
-      },
-    ],
-  },
-  {
-    title: "Resources",
-    items: [
-      {
-        label: "Settings",
-        href: "/settings",
-        icon: Settings,
-      },
-      {
-        label: "Organization",
-        href: "/settings/organization",
-        icon: Building,
-      },
-      {
-        label: "Members",
-        href: "/settings/members",
-        icon: Users,
-      },
-      {
-        label: "Billing",
-        href: "/settings/billing",
-        icon: CircleDollarSign,
-      },
-      {
-        label: "Integrations",
-        href: "/integrations",
-        icon: Layers,
-      },
-      {
-        label: "API Key",
-        href: "/project/api-key",
-        icon: KeyRound,
-      },
-      {
-        label: "Documentation",
-        href: "/docs",
-        icon: FileCode,
-      },
-    ],
-  },
-  {
-    title: "Contacts",
-    items: [
-      {
-        label: "Contact Us",
-        href: "/contact",
-        icon: Mail,
-      },
-      {
-        label: "Status",
-        href: "/status",
-        icon: BarChart2,
-      },
-    ],
-  },
-];
-
 export const SideNavBar = () => {
   const [open, setOpen] = React.useState(false);
   const [settingsOpen, setSettingsOpen] = React.useState(false);
 
   return (
-    <>
-      {/* Hamburger icon for mobile */}
+        <>
+      {/* Hamburger button for small/medium screens */}
       {!open && (
         <button
           aria-label="Open sidebar"
-          className="fixed top-4 right-4 z-50 rounded-full p-2 shadow"
-          style={{ all: "unset", cursor: "pointer" }}
-          tabIndex={0}
+          className="fixed top-4 right-4 z-50 block lg:hidden p-2 rounded-full bg-white shadow"
           type="button"
           onClick={() => setOpen(true)}
         >
@@ -239,142 +142,64 @@ export const SideNavBar = () => {
         </button>
       )}
 
-      {/* Sidebar */}
-      <aside
-        className={`
-          fixed h-screen w-64 bg-white border-r z-40 transform transition-transform
-          ${open ? "translate-x-0" : "-translate-x-full"}
-          lg:translate-x-0 lg:static lg:block
-          flex flex-col px-4 py-6
-        `}
-      >
-        {/* ...logo, org switcher, etc... */}
-        <div className="flex-1 min-h-0 overflow-y-auto pr-1">
-          <nav className="flex-1 flex flex-col gap-6">
-            {sideNavSections.map((section) => (
-              <div key={section.title} className="flex flex-col gap-2">
-                <div className="text-xs text-gray-500 font-medium">
-                  {section.title}
-                </div>
-                <div className="flex flex-col gap-1">
-                  {section.title === "Resources" ? (
-                    <>
-                      {/* Settings with subpanel */}
-                      <button
-                        className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text w-full text-left"
-                        onClick={() => setSettingsOpen((v) => !v)}
-                      >
-                        <Settings className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                        <span className="text-gray-900 hover:text-darkBlue text-sm">
-                          Settings
-                        </span>
-                        {settingsOpen ? (
-                          <ChevronUp className="w-4 h-4 ml-auto" />
-                        ) : (
-                          <ChevronDown className="w-4 h-4 ml-auto" />
-                        )}
-                      </button>
-                      {settingsOpen && (
-                        <div className="ml-8 flex flex-col gap-1">
-                          <Link
-                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
-                            href="/settings/organization"
-                            onClick={() => setOpen(false)}
-                          >
-                            <Building className="w-4 h-4 text-gray-900" />
-                            <span className="text-gray-900 text-sm">
-                              Organization
-                            </span>
-                          </Link>
-                          <Link
-                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
-                            href="/settings/members"
-                            onClick={() => setOpen(false)}
-                          >
-                            <Users className="w-4 h-4 text-gray-900" />
-                            <span className="text-gray-900 text-sm">
-                              Members
-                            </span>
-                          </Link>
-                          <Link
-                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
-                            href="/settings/billing"
-                            onClick={() => setOpen(false)}
-                          >
-                            <CircleDollarSign className="w-4 h-4 text-gray-900" />
-                            <span className="text-gray-900 text-sm">
-                              Billing
-                            </span>
-                          </Link>
-                        </div>
-                      )}
-                      {/* Render the rest of the section except Settings, Organization, Members, Billing */}
-                      {section.items
-                        .filter(
-                          (item) =>
-                            ![
-                              "Settings",
-                              "Organization",
-                              "Members",
-                              "Billing",
-                            ].includes(item.label),
-                        )
-                        .map((item) => (
-                          <Link
-                            key={item.href}
-                            className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
-                            href={item.href}
-                            onClick={() => setOpen(false)}
-                          >
-                            <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                            <span className="text-gray-900 hover:text-darkBlue text-sm">
-                              {item.label}
-                            </span>
-                          </Link>
-                        ))}
-                    </>
-                  ) : (
-                    section.items.map((item) => (
-                      <Link
-                        key={item.href}
-                        className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
-                        href={item.href}
-                        onClick={() => setOpen(false)}
-                      >
-                        <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
-                        <span className="text-gray-900 hover:text-darkBlue text-sm">
-                          {item.label}
-                        </span>
-                      </Link>
-                    ))
-                  )}
-                </div>
-              </div>
-            ))}
-          </nav>
-        </div>
-        {/* User info */}
-        <div className="relative mt-5 mb-0 flex items-center gap-2 py-2 px-2 rounded-lg">
-          <div className="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-medium">
-            N
-          </div>
-          <div>
-            <div className="font-medium">Ngoc Linh Le</div>
-            <div className="text-xs text-gray-500">Free Plan</div>
-          </div>
-        </div>
-      </aside>
-      {/* Overlay for mobile */}
+      {/* Overlay for mobile when sidebar is open */}
       {open && (
         <button
           aria-label="Close sidebar"
-          className="fixed inset-0 bg-black bg-opacity-30 z-30 lg:hidden"
+          className="fixed inset-0 bg-black bg-opacity-30 z-40 lg:hidden"
           style={{ all: "unset", cursor: "pointer" }}
           tabIndex={0}
           type="button"
           onClick={() => setOpen(false)}
         />
       )}
+
+      {/* Sidebar */}
+      <aside
+        className={`
+          fixed h-screen w-64 bg-white border-r z-50 transform transition-transform
+          ${open ? "translate-x-0" : "-translate-x-full"}
+          lg:translate-x-0 lg:static lg:block
+          flex flex-col px-4 py-6
+        `}
+      >
+        {/* Close button inside sidebar for mobile */}
+        <div className="flex justify-end lg:hidden mb-4">
+          {open && (
+            <button
+              aria-label="Close sidebar"
+              className="p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+              type="button"
+              onClick={() => setOpen(false)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
+        </div>
+        <nav className="flex-1 flex flex-col gap-6">
+          {sideNavSections.map((section) => (
+            <div key={section.title} className="flex flex-col gap-2">
+              <div className="text-xs font-bold text-gray-500 uppercase mb-2">{section.title}</div>
+              <div className="flex flex-col gap-1">
+                {section.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    className="flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-blue-50 transition nav-text"
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                  >
+                    <item.icon className="w-5 h-5 text-sm text-gray-900 hover:text-darkBlue" />
+                    <span className="text-gray-900 hover:text-darkBlue text-sm">
+                      {item.label}
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </nav>
+      </aside>
     </>
   );
 };
+
